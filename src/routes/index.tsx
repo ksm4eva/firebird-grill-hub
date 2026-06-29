@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Flame, Leaf, Star, MapPin, Clock, Phone } from "lucide-react";
 
 import { Navbar } from "@/components/firebird/Navbar";
@@ -84,7 +84,7 @@ function Hero() {
             Flame-grilled since day one
           </div>
 
-          <h1 className="text-display mt-6 text-6xl text-[var(--ink)] sm:text-7xl lg:text-[7.5rem]">
+          <h1 className="text-display mt-6 text-5xl text-[var(--ink)] sm:text-7xl lg:text-[7.5rem]">
             BOLD <span className="text-[var(--primary)]">FLAVORS.</span>
             <br />
             <span className="relative inline-block">
@@ -104,12 +104,12 @@ function Hero() {
           </p>
 
           <div className="mt-9 flex flex-wrap items-center gap-4">
-            <a href="#menu" className="btn-primary">
+            <Link to="/menu" className="btn-primary">
               View Menu <ArrowRight size={16} />
-            </a>
-            <a href="#order" className="btn-ghost-cream">
+            </Link>
+            <Link to="/order" className="btn-ghost-cream">
               Order Now
-            </a>
+            </Link>
           </div>
 
           <div className="mt-12 flex flex-wrap items-center gap-8 text-xs uppercase tracking-widest text-[var(--ink)]/60">
@@ -266,9 +266,9 @@ function About() {
             ))}
           </ul>
 
-          <a href="#menu" className="btn-flame mt-10">
+          <Link to="/story" className="btn-flame mt-10">
             Learn More <ArrowRight size={16} />
-          </a>
+          </Link>
         </div>
       </div>
     </section>
@@ -323,9 +323,9 @@ function MenuPreview() {
               <span className="text-[var(--primary)]">HIGHLIGHTS.</span>
             </h2>
           </div>
-          <a href="#order" className="btn-primary">
+          <Link to="/menu" className="btn-primary">
             Full Menu <ArrowRight size={16} />
-          </a>
+          </Link>
         </div>
 
         <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -516,15 +516,15 @@ function CallToAction() {
           Pickup, delivery or dine-in — your next favorite meal is one click away.
         </p>
         <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-          <a href="#order" className="btn-flame">
+          <Link to="/order" className="btn-flame">
             Order Now <ArrowRight size={16} />
-          </a>
-          <a
-            href="#locations"
+          </Link>
+          <Link
+            to="/locations"
             className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-[var(--cream)] bg-transparent px-8 py-4 text-sm font-bold uppercase tracking-widest text-[var(--cream)] transition-all hover:bg-[var(--cream)] hover:text-[var(--primary)] hover:-translate-y-0.5"
           >
             Find Us
-          </a>
+          </Link>
         </div>
       </div>
     </section>
@@ -567,9 +567,9 @@ function Locations() {
               VISIT A <span className="text-[var(--primary)]">LOCATION.</span>
             </h2>
           </div>
-          <a href="#contact" id="contact" className="btn-ghost-cream">
-            Contact Us
-          </a>
+          <Link to="/locations" className="btn-ghost-cream">
+            All Locations
+          </Link>
         </div>
 
         <div className="mt-14 grid gap-6 lg:grid-cols-3">
