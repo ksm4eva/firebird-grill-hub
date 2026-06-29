@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Link } from "@tanstack/react-router";
-import logoBlue from "@/assets/firebird-logo-blue.png.asset.json";
-import logoCream from "@/assets/firebird-logo-cream.png.asset.json";
+import logoBlue from "@/assets/firebird-logo-blue.png";
+import logoCream from "@/assets/firebird-logo-cream.png";
 
 const links = [
   { label: "Menu", to: "/menu" },
@@ -37,7 +37,7 @@ export function Navbar() {
       <div className="mx-auto grid h-20 max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-4 sm:px-6 lg:px-10">
         <Link to="/" className="flex min-w-0 items-center gap-2 sm:gap-3">
           <img
-            src={dark ? logoCream.url : logoBlue.url}
+            src={dark ? logoCream : logoBlue}
             alt="Firebird"
             className="h-10 w-10 shrink-0 object-contain sm:h-12 sm:w-12"
             width={48}

@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { Gift, Mail, Check } from "lucide-react";
 import { PageShell, PageHero } from "@/components/firebird/PageShell";
-import logoCream from "@/assets/firebird-logo-cream.png.asset.json";
+import logoCream from "@/assets/firebird-logo-cream.png";
 
 export const Route = createFileRoute("/gift-cards")({
   head: () => ({
@@ -40,7 +40,7 @@ function GiftCardsPage() {
                 <div className="absolute inset-0 bg-gradient-flame opacity-20" />
                 <div className="relative flex h-full flex-col justify-between text-[var(--cream)]">
                   <div className="flex items-center justify-between">
-                    <img src={logoCream.url} alt="" className="h-12 w-12" />
+                    <img src={logoCream} alt="" className="h-12 w-12" />
                     <Gift size={24} className="text-[var(--accent)]" />
                   </div>
                   <div>

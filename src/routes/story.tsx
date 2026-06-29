@@ -3,7 +3,7 @@ import { ArrowRight, Flame, Leaf } from "lucide-react";
 import { PageShell, PageHero } from "@/components/firebird/PageShell";
 import galleryGrill from "@/assets/gallery-grill.jpg";
 import galleryInterior from "@/assets/gallery-interior.jpg";
-import logoCream from "@/assets/firebird-logo-cream.png.asset.json";
+import logoCream from "@/assets/firebird-logo-cream.png";
 
 export const Route = createFileRoute("/story")({
   head: () => ({
@@ -122,7 +122,7 @@ function StoryPage() {
       <section className="relative overflow-hidden bg-[var(--primary)] py-20 text-center">
         <img src={galleryInterior} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover opacity-20" />
         <div className="relative mx-auto max-w-3xl px-6">
-          <img src={logoCream.url} alt="" className="mx-auto h-16 w-16" />
+          <img src={logoCream} alt="" className="mx-auto h-16 w-16" />
           <h2 className="text-display mt-6 text-4xl text-[var(--cream)] sm:text-5xl">
             COME TASTE THE <span className="text-[var(--accent)]">FIRE.</span>
           </h2>

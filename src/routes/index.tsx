@@ -4,8 +4,8 @@ import { ArrowRight, Flame, Leaf, Star, MapPin, Clock, Phone } from "lucide-reac
 import { Navbar } from "@/components/firebird/Navbar";
 import { Footer } from "@/components/firebird/Footer";
 
-import logoBlue from "@/assets/firebird-logo-blue.png.asset.json";
-import logoCream from "@/assets/firebird-logo-cream.png.asset.json";
+import logoBlue from "@/assets/firebird-logo-blue.png";
+import logoCream from "@/assets/firebird-logo-cream.png";
 import heroBurger from "@/assets/hero-burger.jpg";
 import wings from "@/assets/wings.jpg";
 import menuChicken from "@/assets/menu-chicken.jpg";
@@ -142,7 +142,7 @@ function Hero() {
               style={{ animationDelay: "1.5s" }}
             >
               <img
-                src={logoCream.url}
+                src={logoCream}
                 alt=""
                 className="h-10 w-10"
                 width={40}
@@ -213,7 +213,7 @@ function About() {
       <div className="relative mx-auto grid max-w-7xl items-center gap-16 px-6 lg:grid-cols-2 lg:px-10">
         <div className="space-y-8">
           <div className="aspect-square w-full max-w-md overflow-hidden rounded-[2.5rem] bg-[var(--cream)] p-12 shadow-float">
-            <img src={logoCream.url} alt="Firebird logo" className="h-full w-full object-contain" />
+            <img src={logoBlue} alt="Firebird logo" className="h-full w-full object-contain" />
           </div>
           <div className="grid grid-cols-3 gap-4">
             {[
@@ -501,7 +501,7 @@ function CallToAction() {
       />
       <div className="relative mx-auto max-w-4xl px-6 text-center lg:px-10">
         <img
-          src={logoCream.url}
+          src={logoCream}
           alt="Firebird"
           className="mx-auto h-24 w-24 animate-float"
           width={96}
@@ -580,7 +580,7 @@ function Locations() {
               style={{ animationDelay: `${i * 100}ms` }}
             >
               <div className="absolute right-6 top-6 opacity-10">
-                <img src={logoBlue.url} alt="" className="h-20 w-20" width={80} height={80} />
+                <img src={logoBlue} alt="" className="h-20 w-20" width={80} height={80} />
               </div>
               <p className="text-xs font-bold uppercase tracking-[0.3em] text-[var(--accent)]">
                 Location {String(i + 1).padStart(2, "0")}

@@ -1,6 +1,6 @@
 import { Instagram, Facebook, Twitter } from "lucide-react";
 import { Link } from "@tanstack/react-router";
-import logoCream from "@/assets/firebird-logo-cream.png.asset.json";
+import logoCream from "@/assets/firebird-logo-cream.png";
 
 type Col = { title: string; items: { label: string; to: string }[] };
 
@@ -43,7 +43,7 @@ export function Footer() {
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-12">
           <div>
             <Link to="/" className="flex items-center gap-3">
-              <img src={logoCream.url} alt="Firebird" className="h-14 w-14" width={56} height={56} />
+              <img src={logoCream} alt="Firebird" className="h-14 w-14" width={56} height={56} />
               <span className="text-display text-3xl tracking-wider">FIREBIRD</span>
             </Link>
             <p className="mt-6 text-sm leading-relaxed text-[var(--cream)]/75">
