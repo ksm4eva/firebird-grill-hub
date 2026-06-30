@@ -1,4 +1,4 @@
-import { Link, useRouterState, useNavigate } from "@tanstack/react-router";
+import { useRouterState, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState, type ReactNode } from "react";
 import { LayoutDashboard, UtensilsCrossed, MapPin, Clock, FileText, ShoppingBag, Calendar, Sparkles, Award, Settings as SettingsIcon, LogOut, Menu, X, Flame, RotateCcw } from "lucide-react";
 import { isAdminLoggedIn, adminLogout } from "@/lib/adminAuth";
@@ -62,10 +62,10 @@ function AdminShell({ children }: { children: ReactNode }) {
     <div className="min-h-screen bg-slate-50 text-[var(--ink)]">
       {/* Mobile top bar */}
       <header className="sticky top-0 z-40 flex items-center justify-between border-b border-slate-200 bg-[var(--primary)] px-4 py-3 lg:hidden">
-        <Link to="/admin" className="flex items-center gap-2">
+        <a href="/admin" className="flex items-center gap-2">
           <img src={logoCream} alt="" className="h-8 w-8" />
           <span className="text-display text-lg text-[var(--cream)]">FIREBIRD ADMIN</span>
-        </Link>
+        </a>
         <button onClick={() => setOpen(!open)} className="grid h-10 w-10 place-items-center rounded-full bg-white/10 text-[var(--cream)]">{open ? <X size={18} /> : <Menu size={18} />}</button>
       </header>
 
@@ -85,15 +85,15 @@ function AdminShell({ children }: { children: ReactNode }) {
               const active = n.exact ? pathname === n.to : pathname === n.to || pathname.startsWith(n.to + "/");
               const count = counts[n.to];
               return (
-                <Link
+                <a
                   key={n.to}
-                  to={n.to}
+                  href={n.to}
                   onClick={() => setOpen(false)}
                   className={`flex items-center justify-between gap-2 rounded-xl px-3 py-2.5 text-sm font-semibold transition-colors ${active ? "bg-[var(--accent)] text-white" : "text-[var(--cream)]/80 hover:bg-white/10"}`}
                 >
                   <span className="flex items-center gap-3"><n.icon size={16} /> {n.label}</span>
                   {count > 0 && <span className="rounded-full bg-white/20 px-2 py-0.5 text-[10px] font-bold">{count}</span>}
-                </Link>
+                </a>
               );
             })}
           </nav>
