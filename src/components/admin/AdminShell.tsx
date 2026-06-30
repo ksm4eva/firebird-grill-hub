@@ -99,9 +99,9 @@ function AdminShell({ children }: { children: ReactNode }) {
           </nav>
 
           <div className="mt-6 space-y-2 border-t border-white/10 px-3 py-4">
-            <Link to="/" className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-semibold text-[var(--cream)]/80 hover:bg-white/10">
+            <a href="/" className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-semibold text-[var(--cream)]/80 hover:bg-white/10">
               <Flame size={16} /> View Site
-            </Link>
+            </a>
             <button onClick={() => { if (confirm("Reset all data to defaults? This wipes orders, edits, everything.")) reset(); }} className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-semibold text-[var(--cream)]/80 hover:bg-white/10">
               <RotateCcw size={16} /> Reset Data
             </button>
