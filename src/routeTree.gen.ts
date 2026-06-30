@@ -20,8 +20,20 @@ import { Route as HoursRouteImport } from './routes/hours'
 import { Route as GiftCardsRouteImport } from './routes/gift-cards'
 import { Route as CateringRouteImport } from './routes/catering'
 import { Route as CareersRouteImport } from './routes/careers'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as AdminSettingsRouteImport } from './routes/admin.settings'
+import { Route as AdminReservationsRouteImport } from './routes/admin.reservations'
+import { Route as AdminOrdersRouteImport } from './routes/admin.orders'
+import { Route as AdminMenuRouteImport } from './routes/admin.menu'
+import { Route as AdminLoyaltyRouteImport } from './routes/admin.loyalty'
+import { Route as AdminLoginRouteImport } from './routes/admin.login'
+import { Route as AdminLocationsRouteImport } from './routes/admin.locations'
+import { Route as AdminHoursRouteImport } from './routes/admin.hours'
+import { Route as AdminContentRouteImport } from './routes/admin.content'
+import { Route as AdminCateringRouteImport } from './routes/admin.catering'
 
 const StoryRoute = StoryRouteImport.update({
   id: '/story',
@@ -78,6 +90,11 @@ const CareersRoute = CareersRouteImport.update({
   path: '/careers',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
@@ -88,10 +105,66 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminSettingsRoute = AdminSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminReservationsRoute = AdminReservationsRouteImport.update({
+  id: '/reservations',
+  path: '/reservations',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminOrdersRoute = AdminOrdersRouteImport.update({
+  id: '/orders',
+  path: '/orders',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminMenuRoute = AdminMenuRouteImport.update({
+  id: '/menu',
+  path: '/menu',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminLoyaltyRoute = AdminLoyaltyRouteImport.update({
+  id: '/loyalty',
+  path: '/loyalty',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminLoginRoute = AdminLoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminLocationsRoute = AdminLocationsRouteImport.update({
+  id: '/locations',
+  path: '/locations',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminHoursRoute = AdminHoursRouteImport.update({
+  id: '/hours',
+  path: '/hours',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminContentRoute = AdminContentRouteImport.update({
+  id: '/content',
+  path: '/content',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminCateringRoute = AdminCateringRouteImport.update({
+  id: '/catering',
+  path: '/catering',
+  getParentRoute: () => AdminRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/admin': typeof AdminRouteWithChildren
   '/careers': typeof CareersRoute
   '/catering': typeof CateringRoute
   '/gift-cards': typeof GiftCardsRoute
@@ -103,6 +176,17 @@ export interface FileRoutesByFullPath {
   '/press': typeof PressRoute
   '/reservations': typeof ReservationsRoute
   '/story': typeof StoryRoute
+  '/admin/catering': typeof AdminCateringRoute
+  '/admin/content': typeof AdminContentRoute
+  '/admin/hours': typeof AdminHoursRoute
+  '/admin/locations': typeof AdminLocationsRoute
+  '/admin/login': typeof AdminLoginRoute
+  '/admin/loyalty': typeof AdminLoyaltyRoute
+  '/admin/menu': typeof AdminMenuRoute
+  '/admin/orders': typeof AdminOrdersRoute
+  '/admin/reservations': typeof AdminReservationsRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/': typeof AdminIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -118,11 +202,23 @@ export interface FileRoutesByTo {
   '/press': typeof PressRoute
   '/reservations': typeof ReservationsRoute
   '/story': typeof StoryRoute
+  '/admin/catering': typeof AdminCateringRoute
+  '/admin/content': typeof AdminContentRoute
+  '/admin/hours': typeof AdminHoursRoute
+  '/admin/locations': typeof AdminLocationsRoute
+  '/admin/login': typeof AdminLoginRoute
+  '/admin/loyalty': typeof AdminLoyaltyRoute
+  '/admin/menu': typeof AdminMenuRoute
+  '/admin/orders': typeof AdminOrdersRoute
+  '/admin/reservations': typeof AdminReservationsRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin': typeof AdminIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/admin': typeof AdminRouteWithChildren
   '/careers': typeof CareersRoute
   '/catering': typeof CateringRoute
   '/gift-cards': typeof GiftCardsRoute
@@ -134,12 +230,24 @@ export interface FileRoutesById {
   '/press': typeof PressRoute
   '/reservations': typeof ReservationsRoute
   '/story': typeof StoryRoute
+  '/admin/catering': typeof AdminCateringRoute
+  '/admin/content': typeof AdminContentRoute
+  '/admin/hours': typeof AdminHoursRoute
+  '/admin/locations': typeof AdminLocationsRoute
+  '/admin/login': typeof AdminLoginRoute
+  '/admin/loyalty': typeof AdminLoyaltyRoute
+  '/admin/menu': typeof AdminMenuRoute
+  '/admin/orders': typeof AdminOrdersRoute
+  '/admin/reservations': typeof AdminReservationsRoute
+  '/admin/settings': typeof AdminSettingsRoute
+  '/admin/': typeof AdminIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/about'
+    | '/admin'
     | '/careers'
     | '/catering'
     | '/gift-cards'
@@ -151,6 +259,17 @@ export interface FileRouteTypes {
     | '/press'
     | '/reservations'
     | '/story'
+    | '/admin/catering'
+    | '/admin/content'
+    | '/admin/hours'
+    | '/admin/locations'
+    | '/admin/login'
+    | '/admin/loyalty'
+    | '/admin/menu'
+    | '/admin/orders'
+    | '/admin/reservations'
+    | '/admin/settings'
+    | '/admin/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -166,10 +285,22 @@ export interface FileRouteTypes {
     | '/press'
     | '/reservations'
     | '/story'
+    | '/admin/catering'
+    | '/admin/content'
+    | '/admin/hours'
+    | '/admin/locations'
+    | '/admin/login'
+    | '/admin/loyalty'
+    | '/admin/menu'
+    | '/admin/orders'
+    | '/admin/reservations'
+    | '/admin/settings'
+    | '/admin'
   id:
     | '__root__'
     | '/'
     | '/about'
+    | '/admin'
     | '/careers'
     | '/catering'
     | '/gift-cards'
@@ -181,11 +312,23 @@ export interface FileRouteTypes {
     | '/press'
     | '/reservations'
     | '/story'
+    | '/admin/catering'
+    | '/admin/content'
+    | '/admin/hours'
+    | '/admin/locations'
+    | '/admin/login'
+    | '/admin/loyalty'
+    | '/admin/menu'
+    | '/admin/orders'
+    | '/admin/reservations'
+    | '/admin/settings'
+    | '/admin/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  AdminRoute: typeof AdminRouteWithChildren
   CareersRoute: typeof CareersRoute
   CateringRoute: typeof CateringRoute
   GiftCardsRoute: typeof GiftCardsRoute
@@ -278,6 +421,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CareersRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/about': {
       id: '/about'
       path: '/about'
@@ -292,12 +442,120 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/settings': {
+      id: '/admin/settings'
+      path: '/settings'
+      fullPath: '/admin/settings'
+      preLoaderRoute: typeof AdminSettingsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/reservations': {
+      id: '/admin/reservations'
+      path: '/reservations'
+      fullPath: '/admin/reservations'
+      preLoaderRoute: typeof AdminReservationsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/orders': {
+      id: '/admin/orders'
+      path: '/orders'
+      fullPath: '/admin/orders'
+      preLoaderRoute: typeof AdminOrdersRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/menu': {
+      id: '/admin/menu'
+      path: '/menu'
+      fullPath: '/admin/menu'
+      preLoaderRoute: typeof AdminMenuRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/loyalty': {
+      id: '/admin/loyalty'
+      path: '/loyalty'
+      fullPath: '/admin/loyalty'
+      preLoaderRoute: typeof AdminLoyaltyRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/login': {
+      id: '/admin/login'
+      path: '/login'
+      fullPath: '/admin/login'
+      preLoaderRoute: typeof AdminLoginRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/locations': {
+      id: '/admin/locations'
+      path: '/locations'
+      fullPath: '/admin/locations'
+      preLoaderRoute: typeof AdminLocationsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/hours': {
+      id: '/admin/hours'
+      path: '/hours'
+      fullPath: '/admin/hours'
+      preLoaderRoute: typeof AdminHoursRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/content': {
+      id: '/admin/content'
+      path: '/content'
+      fullPath: '/admin/content'
+      preLoaderRoute: typeof AdminContentRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/catering': {
+      id: '/admin/catering'
+      path: '/catering'
+      fullPath: '/admin/catering'
+      preLoaderRoute: typeof AdminCateringRouteImport
+      parentRoute: typeof AdminRoute
+    }
   }
 }
+
+interface AdminRouteChildren {
+  AdminCateringRoute: typeof AdminCateringRoute
+  AdminContentRoute: typeof AdminContentRoute
+  AdminHoursRoute: typeof AdminHoursRoute
+  AdminLocationsRoute: typeof AdminLocationsRoute
+  AdminLoginRoute: typeof AdminLoginRoute
+  AdminLoyaltyRoute: typeof AdminLoyaltyRoute
+  AdminMenuRoute: typeof AdminMenuRoute
+  AdminOrdersRoute: typeof AdminOrdersRoute
+  AdminReservationsRoute: typeof AdminReservationsRoute
+  AdminSettingsRoute: typeof AdminSettingsRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminCateringRoute: AdminCateringRoute,
+  AdminContentRoute: AdminContentRoute,
+  AdminHoursRoute: AdminHoursRoute,
+  AdminLocationsRoute: AdminLocationsRoute,
+  AdminLoginRoute: AdminLoginRoute,
+  AdminLoyaltyRoute: AdminLoyaltyRoute,
+  AdminMenuRoute: AdminMenuRoute,
+  AdminOrdersRoute: AdminOrdersRoute,
+  AdminReservationsRoute: AdminReservationsRoute,
+  AdminSettingsRoute: AdminSettingsRoute,
+  AdminIndexRoute: AdminIndexRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  AdminRoute: AdminRouteWithChildren,
   CareersRoute: CareersRoute,
   CateringRoute: CateringRoute,
   GiftCardsRoute: GiftCardsRoute,
@@ -313,13 +571,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
