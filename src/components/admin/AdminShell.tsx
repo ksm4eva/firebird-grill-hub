@@ -5,7 +5,7 @@ import { isAdminLoggedIn, adminLogout } from "@/lib/adminAuth";
 import { useAdmin } from "@/lib/adminStore";
 import logoCream from "@/assets/firebird-logo-cream.png";
 
-const navItems = [
+const navItems: { to: string; label: string; icon: typeof LayoutDashboard; exact?: boolean }[] = [
   { to: "/admin", label: "Dashboard", icon: LayoutDashboard, exact: true },
   { to: "/admin/menu", label: "Menu", icon: UtensilsCrossed },
   { to: "/admin/locations", label: "Locations", icon: MapPin },
@@ -16,7 +16,7 @@ const navItems = [
   { to: "/admin/catering", label: "Catering", icon: Sparkles },
   { to: "/admin/loyalty", label: "Loyalty", icon: Award },
   { to: "/admin/settings", label: "Settings", icon: SettingsIcon },
-] as const;
+];
 
 export function AdminGate({ children }: { children: ReactNode }) {
   const navigate = useNavigate();
