@@ -18,11 +18,13 @@ import { Route as LoyaltyRouteImport } from './routes/loyalty'
 import { Route as LocationsRouteImport } from './routes/locations'
 import { Route as HoursRouteImport } from './routes/hours'
 import { Route as GiftCardsRouteImport } from './routes/gift-cards'
+import { Route as DiamondRouteImport } from './routes/diamond'
 import { Route as CateringRouteImport } from './routes/catering'
 import { Route as CareersRouteImport } from './routes/careers'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DiamondIndexRouteImport } from './routes/diamond.index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as AdminSettingsRouteImport } from './routes/admin.settings'
 import { Route as AdminReservationsRouteImport } from './routes/admin.reservations'
@@ -80,6 +82,11 @@ const GiftCardsRoute = GiftCardsRouteImport.update({
   path: '/gift-cards',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DiamondRoute = DiamondRouteImport.update({
+  id: '/diamond',
+  path: '/diamond',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CateringRoute = CateringRouteImport.update({
   id: '/catering',
   path: '/catering',
@@ -104,6 +111,11 @@ const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
+} as any)
+const DiamondIndexRoute = DiamondIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => DiamondRoute,
 } as any)
 const AdminIndexRoute = AdminIndexRouteImport.update({
   id: '/',
@@ -167,6 +179,7 @@ export interface FileRoutesByFullPath {
   '/admin': typeof AdminRouteWithChildren
   '/careers': typeof CareersRoute
   '/catering': typeof CateringRoute
+  '/diamond': typeof DiamondRouteWithChildren
   '/gift-cards': typeof GiftCardsRoute
   '/hours': typeof HoursRoute
   '/locations': typeof LocationsRoute
@@ -187,6 +200,7 @@ export interface FileRoutesByFullPath {
   '/admin/reservations': typeof AdminReservationsRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/': typeof AdminIndexRoute
+  '/diamond/': typeof DiamondIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -213,6 +227,7 @@ export interface FileRoutesByTo {
   '/admin/reservations': typeof AdminReservationsRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/admin': typeof AdminIndexRoute
+  '/diamond': typeof DiamondIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -221,6 +236,7 @@ export interface FileRoutesById {
   '/admin': typeof AdminRouteWithChildren
   '/careers': typeof CareersRoute
   '/catering': typeof CateringRoute
+  '/diamond': typeof DiamondRouteWithChildren
   '/gift-cards': typeof GiftCardsRoute
   '/hours': typeof HoursRoute
   '/locations': typeof LocationsRoute
@@ -241,6 +257,7 @@ export interface FileRoutesById {
   '/admin/reservations': typeof AdminReservationsRoute
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/': typeof AdminIndexRoute
+  '/diamond/': typeof DiamondIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -250,6 +267,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/careers'
     | '/catering'
+    | '/diamond'
     | '/gift-cards'
     | '/hours'
     | '/locations'
@@ -270,6 +288,7 @@ export interface FileRouteTypes {
     | '/admin/reservations'
     | '/admin/settings'
     | '/admin/'
+    | '/diamond/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -296,6 +315,7 @@ export interface FileRouteTypes {
     | '/admin/reservations'
     | '/admin/settings'
     | '/admin'
+    | '/diamond'
   id:
     | '__root__'
     | '/'
@@ -303,6 +323,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/careers'
     | '/catering'
+    | '/diamond'
     | '/gift-cards'
     | '/hours'
     | '/locations'
@@ -323,6 +344,7 @@ export interface FileRouteTypes {
     | '/admin/reservations'
     | '/admin/settings'
     | '/admin/'
+    | '/diamond/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -331,6 +353,7 @@ export interface RootRouteChildren {
   AdminRoute: typeof AdminRouteWithChildren
   CareersRoute: typeof CareersRoute
   CateringRoute: typeof CateringRoute
+  DiamondRoute: typeof DiamondRouteWithChildren
   GiftCardsRoute: typeof GiftCardsRoute
   HoursRoute: typeof HoursRoute
   LocationsRoute: typeof LocationsRoute
@@ -407,6 +430,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof GiftCardsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/diamond': {
+      id: '/diamond'
+      path: '/diamond'
+      fullPath: '/diamond'
+      preLoaderRoute: typeof DiamondRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/catering': {
       id: '/catering'
       path: '/catering'
@@ -441,6 +471,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/diamond/': {
+      id: '/diamond/'
+      path: '/'
+      fullPath: '/diamond/'
+      preLoaderRoute: typeof DiamondIndexRouteImport
+      parentRoute: typeof DiamondRoute
     }
     '/admin/': {
       id: '/admin/'
@@ -552,12 +589,24 @@ const AdminRouteChildren: AdminRouteChildren = {
 
 const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
+interface DiamondRouteChildren {
+  DiamondIndexRoute: typeof DiamondIndexRoute
+}
+
+const DiamondRouteChildren: DiamondRouteChildren = {
+  DiamondIndexRoute: DiamondIndexRoute,
+}
+
+const DiamondRouteWithChildren =
+  DiamondRoute._addFileChildren(DiamondRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   AdminRoute: AdminRouteWithChildren,
   CareersRoute: CareersRoute,
   CateringRoute: CateringRoute,
+  DiamondRoute: DiamondRouteWithChildren,
   GiftCardsRoute: GiftCardsRoute,
   HoursRoute: HoursRoute,
   LocationsRoute: LocationsRoute,
