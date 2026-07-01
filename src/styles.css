@@ -1,6 +1,14 @@
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
+@import "@fontsource/cormorant-garamond/400.css";
+@import "@fontsource/cormorant-garamond/500.css";
+@import "@fontsource/cormorant-garamond/600.css";
+@import "@fontsource/cormorant-garamond/700.css";
+@import "@fontsource/inter/300.css";
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/inter/600.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -252,4 +260,178 @@
 }
 @utility animate-marquee {
   animation: marquee 30s linear infinite;
+}
+
+/* ============================================================
+   DIAMOND CITY — luxury apartments (scoped under .diamond-root)
+   ============================================================ */
+.diamond-root {
+  --dc-charcoal: #2E3136;
+  --dc-graphite: #45484C;
+  --dc-concrete: #B9BEC4;
+  --dc-pool: #18C4F8;
+  --dc-aqua: #007FA6;
+  --dc-palm: #4A7440;
+  --dc-garden: #739E52;
+  --dc-wood: #755338;
+  --dc-sand: #D8C6A7;
+  --dc-white: #FFFFFF;
+
+  --dc-serif: "Cormorant Garamond", "Playfair Display", ui-serif, Georgia, serif;
+  --dc-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  color: var(--dc-charcoal);
+  font-family: var(--dc-sans);
+  background: var(--dc-white);
+  -webkit-font-smoothing: antialiased;
+}
+.diamond-root h1,
+.diamond-root h2,
+.diamond-root h3,
+.diamond-root h4 {
+  font-family: var(--dc-serif);
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  line-height: 1.05;
+  text-transform: none;
+}
+
+@keyframes dc-shimmer {
+  0%, 100% { opacity: 0.3; transform: translate3d(0, 0, 0) scale(1); }
+  50% { opacity: 0.6; transform: translate3d(0, -6px, 0) scale(1.05); }
+}
+@keyframes dc-ripple {
+  0% { transform: scale(1); opacity: 0.4; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+@keyframes dc-float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-14px); }
+}
+@keyframes dc-fadeup {
+  from { opacity: 0; transform: translate3d(0, 32px, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+@keyframes dc-water {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.diamond-root .dc-fade-up {
+  animation: dc-fadeup 1.1s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.diamond-root .dc-float {
+  animation: dc-float 7s ease-in-out infinite;
+}
+.diamond-root .dc-shimmer {
+  animation: dc-shimmer 5s ease-in-out infinite;
+}
+
+.diamond-root .dc-glass {
+  background: color-mix(in oklab, white 55%, transparent);
+  backdrop-filter: blur(22px) saturate(160%);
+  border: 1px solid color-mix(in oklab, white 45%, transparent);
+}
+.diamond-root .dc-glass-dark {
+  background: color-mix(in oklab, #2E3136 55%, transparent);
+  backdrop-filter: blur(24px) saturate(140%);
+  border: 1px solid color-mix(in oklab, white 12%, transparent);
+}
+
+.diamond-root .dc-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 1rem 2rem;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, #18C4F8 0%, #007FA6 100%);
+  color: #fff;
+  font-weight: 500;
+  font-size: 0.82rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  box-shadow: 0 12px 40px -12px rgba(24, 196, 248, 0.55), 0 4px 12px -6px rgba(0, 127, 166, 0.3);
+  transition: transform 400ms cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 400ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.diamond-root .dc-btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 22px 55px -12px rgba(24, 196, 248, 0.7), 0 6px 20px -6px rgba(0, 127, 166, 0.5);
+}
+.diamond-root .dc-btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 1rem 2rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  color: #fff;
+  font-weight: 500;
+  font-size: 0.82rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(14px);
+  transition: all 400ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.diamond-root .dc-btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.16);
+  transform: translateY(-3px);
+  border-color: rgba(255, 255, 255, 0.85);
+}
+.diamond-root .dc-btn-dark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.9rem 1.8rem;
+  border-radius: 9999px;
+  background: #2E3136;
+  color: #fff;
+  font-weight: 500;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition: all 400ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.diamond-root .dc-btn-dark:hover {
+  background: #007FA6;
+  transform: translateY(-2px);
+  box-shadow: 0 16px 40px -12px rgba(0, 127, 166, 0.6);
+}
+
+.diamond-root .dc-link {
+  position: relative;
+  display: inline-block;
+  color: inherit;
+  overflow: hidden;
+  padding-bottom: 2px;
+}
+.diamond-root .dc-link::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 0;
+  height: 1px;
+  background: currentColor;
+  transition: width 500ms cubic-bezier(0.22, 1, 0.36, 1), left 500ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.diamond-root .dc-link:hover::after {
+  width: 100%;
+  left: 0;
+}
+
+.diamond-root .dc-eyebrow {
+  font-family: var(--dc-sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--dc-aqua);
+}
+
+.diamond-root .dc-water-bg {
+  background: linear-gradient(135deg, #18C4F8 0%, #007FA6 40%, #2E3136 100%);
+  background-size: 200% 200%;
+  animation: dc-water 12s ease-in-out infinite;
 }
