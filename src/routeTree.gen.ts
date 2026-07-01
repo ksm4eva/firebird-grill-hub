@@ -36,6 +36,15 @@ import { Route as AdminLocationsRouteImport } from './routes/admin.locations'
 import { Route as AdminHoursRouteImport } from './routes/admin.hours'
 import { Route as AdminContentRouteImport } from './routes/admin.content'
 import { Route as AdminCateringRouteImport } from './routes/admin.catering'
+import { Route as DiamondAdminIndexRouteImport } from './routes/diamond.admin.index'
+import { Route as DiamondAdminTestimonialsRouteImport } from './routes/diamond.admin.testimonials'
+import { Route as DiamondAdminSettingsRouteImport } from './routes/diamond.admin.settings'
+import { Route as DiamondAdminLoginRouteImport } from './routes/diamond.admin.login'
+import { Route as DiamondAdminGalleryRouteImport } from './routes/diamond.admin.gallery'
+import { Route as DiamondAdminContentRouteImport } from './routes/diamond.admin.content'
+import { Route as DiamondAdminBookingsRouteImport } from './routes/diamond.admin.bookings'
+import { Route as DiamondAdminApartmentsRouteImport } from './routes/diamond.admin.apartments'
+import { Route as DiamondAdminAmenitiesRouteImport } from './routes/diamond.admin.amenities'
 
 const StoryRoute = StoryRouteImport.update({
   id: '/story',
@@ -172,6 +181,52 @@ const AdminCateringRoute = AdminCateringRouteImport.update({
   path: '/catering',
   getParentRoute: () => AdminRoute,
 } as any)
+const DiamondAdminIndexRoute = DiamondAdminIndexRouteImport.update({
+  id: '/admin/',
+  path: '/admin/',
+  getParentRoute: () => DiamondRoute,
+} as any)
+const DiamondAdminTestimonialsRoute =
+  DiamondAdminTestimonialsRouteImport.update({
+    id: '/admin/testimonials',
+    path: '/admin/testimonials',
+    getParentRoute: () => DiamondRoute,
+  } as any)
+const DiamondAdminSettingsRoute = DiamondAdminSettingsRouteImport.update({
+  id: '/admin/settings',
+  path: '/admin/settings',
+  getParentRoute: () => DiamondRoute,
+} as any)
+const DiamondAdminLoginRoute = DiamondAdminLoginRouteImport.update({
+  id: '/admin/login',
+  path: '/admin/login',
+  getParentRoute: () => DiamondRoute,
+} as any)
+const DiamondAdminGalleryRoute = DiamondAdminGalleryRouteImport.update({
+  id: '/admin/gallery',
+  path: '/admin/gallery',
+  getParentRoute: () => DiamondRoute,
+} as any)
+const DiamondAdminContentRoute = DiamondAdminContentRouteImport.update({
+  id: '/admin/content',
+  path: '/admin/content',
+  getParentRoute: () => DiamondRoute,
+} as any)
+const DiamondAdminBookingsRoute = DiamondAdminBookingsRouteImport.update({
+  id: '/admin/bookings',
+  path: '/admin/bookings',
+  getParentRoute: () => DiamondRoute,
+} as any)
+const DiamondAdminApartmentsRoute = DiamondAdminApartmentsRouteImport.update({
+  id: '/admin/apartments',
+  path: '/admin/apartments',
+  getParentRoute: () => DiamondRoute,
+} as any)
+const DiamondAdminAmenitiesRoute = DiamondAdminAmenitiesRouteImport.update({
+  id: '/admin/amenities',
+  path: '/admin/amenities',
+  getParentRoute: () => DiamondRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -201,6 +256,15 @@ export interface FileRoutesByFullPath {
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/': typeof AdminIndexRoute
   '/diamond/': typeof DiamondIndexRoute
+  '/diamond/admin/amenities': typeof DiamondAdminAmenitiesRoute
+  '/diamond/admin/apartments': typeof DiamondAdminApartmentsRoute
+  '/diamond/admin/bookings': typeof DiamondAdminBookingsRoute
+  '/diamond/admin/content': typeof DiamondAdminContentRoute
+  '/diamond/admin/gallery': typeof DiamondAdminGalleryRoute
+  '/diamond/admin/login': typeof DiamondAdminLoginRoute
+  '/diamond/admin/settings': typeof DiamondAdminSettingsRoute
+  '/diamond/admin/testimonials': typeof DiamondAdminTestimonialsRoute
+  '/diamond/admin/': typeof DiamondAdminIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -228,6 +292,15 @@ export interface FileRoutesByTo {
   '/admin/settings': typeof AdminSettingsRoute
   '/admin': typeof AdminIndexRoute
   '/diamond': typeof DiamondIndexRoute
+  '/diamond/admin/amenities': typeof DiamondAdminAmenitiesRoute
+  '/diamond/admin/apartments': typeof DiamondAdminApartmentsRoute
+  '/diamond/admin/bookings': typeof DiamondAdminBookingsRoute
+  '/diamond/admin/content': typeof DiamondAdminContentRoute
+  '/diamond/admin/gallery': typeof DiamondAdminGalleryRoute
+  '/diamond/admin/login': typeof DiamondAdminLoginRoute
+  '/diamond/admin/settings': typeof DiamondAdminSettingsRoute
+  '/diamond/admin/testimonials': typeof DiamondAdminTestimonialsRoute
+  '/diamond/admin': typeof DiamondAdminIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -258,6 +331,15 @@ export interface FileRoutesById {
   '/admin/settings': typeof AdminSettingsRoute
   '/admin/': typeof AdminIndexRoute
   '/diamond/': typeof DiamondIndexRoute
+  '/diamond/admin/amenities': typeof DiamondAdminAmenitiesRoute
+  '/diamond/admin/apartments': typeof DiamondAdminApartmentsRoute
+  '/diamond/admin/bookings': typeof DiamondAdminBookingsRoute
+  '/diamond/admin/content': typeof DiamondAdminContentRoute
+  '/diamond/admin/gallery': typeof DiamondAdminGalleryRoute
+  '/diamond/admin/login': typeof DiamondAdminLoginRoute
+  '/diamond/admin/settings': typeof DiamondAdminSettingsRoute
+  '/diamond/admin/testimonials': typeof DiamondAdminTestimonialsRoute
+  '/diamond/admin/': typeof DiamondAdminIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -289,6 +371,15 @@ export interface FileRouteTypes {
     | '/admin/settings'
     | '/admin/'
     | '/diamond/'
+    | '/diamond/admin/amenities'
+    | '/diamond/admin/apartments'
+    | '/diamond/admin/bookings'
+    | '/diamond/admin/content'
+    | '/diamond/admin/gallery'
+    | '/diamond/admin/login'
+    | '/diamond/admin/settings'
+    | '/diamond/admin/testimonials'
+    | '/diamond/admin/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -316,6 +407,15 @@ export interface FileRouteTypes {
     | '/admin/settings'
     | '/admin'
     | '/diamond'
+    | '/diamond/admin/amenities'
+    | '/diamond/admin/apartments'
+    | '/diamond/admin/bookings'
+    | '/diamond/admin/content'
+    | '/diamond/admin/gallery'
+    | '/diamond/admin/login'
+    | '/diamond/admin/settings'
+    | '/diamond/admin/testimonials'
+    | '/diamond/admin'
   id:
     | '__root__'
     | '/'
@@ -345,6 +445,15 @@ export interface FileRouteTypes {
     | '/admin/settings'
     | '/admin/'
     | '/diamond/'
+    | '/diamond/admin/amenities'
+    | '/diamond/admin/apartments'
+    | '/diamond/admin/bookings'
+    | '/diamond/admin/content'
+    | '/diamond/admin/gallery'
+    | '/diamond/admin/login'
+    | '/diamond/admin/settings'
+    | '/diamond/admin/testimonials'
+    | '/diamond/admin/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -556,6 +665,69 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminCateringRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/diamond/admin/': {
+      id: '/diamond/admin/'
+      path: '/admin'
+      fullPath: '/diamond/admin/'
+      preLoaderRoute: typeof DiamondAdminIndexRouteImport
+      parentRoute: typeof DiamondRoute
+    }
+    '/diamond/admin/testimonials': {
+      id: '/diamond/admin/testimonials'
+      path: '/admin/testimonials'
+      fullPath: '/diamond/admin/testimonials'
+      preLoaderRoute: typeof DiamondAdminTestimonialsRouteImport
+      parentRoute: typeof DiamondRoute
+    }
+    '/diamond/admin/settings': {
+      id: '/diamond/admin/settings'
+      path: '/admin/settings'
+      fullPath: '/diamond/admin/settings'
+      preLoaderRoute: typeof DiamondAdminSettingsRouteImport
+      parentRoute: typeof DiamondRoute
+    }
+    '/diamond/admin/login': {
+      id: '/diamond/admin/login'
+      path: '/admin/login'
+      fullPath: '/diamond/admin/login'
+      preLoaderRoute: typeof DiamondAdminLoginRouteImport
+      parentRoute: typeof DiamondRoute
+    }
+    '/diamond/admin/gallery': {
+      id: '/diamond/admin/gallery'
+      path: '/admin/gallery'
+      fullPath: '/diamond/admin/gallery'
+      preLoaderRoute: typeof DiamondAdminGalleryRouteImport
+      parentRoute: typeof DiamondRoute
+    }
+    '/diamond/admin/content': {
+      id: '/diamond/admin/content'
+      path: '/admin/content'
+      fullPath: '/diamond/admin/content'
+      preLoaderRoute: typeof DiamondAdminContentRouteImport
+      parentRoute: typeof DiamondRoute
+    }
+    '/diamond/admin/bookings': {
+      id: '/diamond/admin/bookings'
+      path: '/admin/bookings'
+      fullPath: '/diamond/admin/bookings'
+      preLoaderRoute: typeof DiamondAdminBookingsRouteImport
+      parentRoute: typeof DiamondRoute
+    }
+    '/diamond/admin/apartments': {
+      id: '/diamond/admin/apartments'
+      path: '/admin/apartments'
+      fullPath: '/diamond/admin/apartments'
+      preLoaderRoute: typeof DiamondAdminApartmentsRouteImport
+      parentRoute: typeof DiamondRoute
+    }
+    '/diamond/admin/amenities': {
+      id: '/diamond/admin/amenities'
+      path: '/admin/amenities'
+      fullPath: '/diamond/admin/amenities'
+      preLoaderRoute: typeof DiamondAdminAmenitiesRouteImport
+      parentRoute: typeof DiamondRoute
+    }
   }
 }
 
@@ -591,10 +763,28 @@ const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
 interface DiamondRouteChildren {
   DiamondIndexRoute: typeof DiamondIndexRoute
+  DiamondAdminAmenitiesRoute: typeof DiamondAdminAmenitiesRoute
+  DiamondAdminApartmentsRoute: typeof DiamondAdminApartmentsRoute
+  DiamondAdminBookingsRoute: typeof DiamondAdminBookingsRoute
+  DiamondAdminContentRoute: typeof DiamondAdminContentRoute
+  DiamondAdminGalleryRoute: typeof DiamondAdminGalleryRoute
+  DiamondAdminLoginRoute: typeof DiamondAdminLoginRoute
+  DiamondAdminSettingsRoute: typeof DiamondAdminSettingsRoute
+  DiamondAdminTestimonialsRoute: typeof DiamondAdminTestimonialsRoute
+  DiamondAdminIndexRoute: typeof DiamondAdminIndexRoute
 }
 
 const DiamondRouteChildren: DiamondRouteChildren = {
   DiamondIndexRoute: DiamondIndexRoute,
+  DiamondAdminAmenitiesRoute: DiamondAdminAmenitiesRoute,
+  DiamondAdminApartmentsRoute: DiamondAdminApartmentsRoute,
+  DiamondAdminBookingsRoute: DiamondAdminBookingsRoute,
+  DiamondAdminContentRoute: DiamondAdminContentRoute,
+  DiamondAdminGalleryRoute: DiamondAdminGalleryRoute,
+  DiamondAdminLoginRoute: DiamondAdminLoginRoute,
+  DiamondAdminSettingsRoute: DiamondAdminSettingsRoute,
+  DiamondAdminTestimonialsRoute: DiamondAdminTestimonialsRoute,
+  DiamondAdminIndexRoute: DiamondAdminIndexRoute,
 }
 
 const DiamondRouteWithChildren =

@@ -3,7 +3,8 @@ import { Link, useNavigate, useLocation } from "@tanstack/react-router";
 import { LayoutDashboard, Home, Sparkles, Image as ImageIcon, MessageSquare, FileText, CalendarCheck, Settings as SettingsIcon, LogOut } from "lucide-react";
 import { isDiamondLoggedIn, diamondLogout, useDiamond } from "@/lib/diamondStore";
 
-const items = [
+type NavItem = { to: string; label: string; icon: typeof LayoutDashboard; exact?: boolean };
+const items: NavItem[] = [
   { to: "/diamond/admin", label: "Dashboard", icon: LayoutDashboard, exact: true },
   { to: "/diamond/admin/apartments", label: "Apartments", icon: Home },
   { to: "/diamond/admin/amenities", label: "Amenities", icon: Sparkles },
@@ -12,7 +13,7 @@ const items = [
   { to: "/diamond/admin/content", label: "Site Content", icon: FileText },
   { to: "/diamond/admin/bookings", label: "Tour Bookings", icon: CalendarCheck },
   { to: "/diamond/admin/settings", label: "Settings", icon: SettingsIcon },
-] as const;
+];
 
 export function DiamondAdminGate({ children }: { children: ReactNode }) {
   const [ready, setReady] = useState(false);
