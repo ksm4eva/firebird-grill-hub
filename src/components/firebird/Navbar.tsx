@@ -34,14 +34,14 @@ export function Navbar() {
           : "bg-transparent"
       }`}
     >
-      <div className="mx-auto grid h-20 max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-4 sm:px-6 lg:px-10">
+      <div className="mx-auto grid h-24 max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-4 sm:px-6 lg:px-10">
         <Link to="/" className="flex min-w-0 items-center gap-2 sm:gap-3">
           <img
             src={dark ? logoCream : logoBlue}
             alt="Firebird"
-            className="h-10 w-10 shrink-0 object-contain sm:h-12 sm:w-12"
-            width={48}
-            height={48}
+            className="h-16 w-16 shrink-0 object-contain sm:h-20 sm:w-20"
+            width={80}
+            height={80}
           />
           <span
             className={`text-display truncate text-xl tracking-wider sm:text-2xl ${
