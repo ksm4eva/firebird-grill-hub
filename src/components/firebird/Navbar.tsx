@@ -39,7 +39,7 @@ export function Navbar() {
           <img
             src={dark ? logoCream : logoBlue}
             alt="Firebird"
-            className="h-16 w-16 shrink-0 object-contain sm:h-20 sm:w-20"
+            className="h-16 w-16 shrink-0 rounded-full object-cover sm:h-20 sm:w-20"
             width={80}
             height={80}
           />
