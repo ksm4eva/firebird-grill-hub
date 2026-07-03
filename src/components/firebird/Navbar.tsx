@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Link } from "@tanstack/react-router";
-import logoBlue from "@/assets/firebird-logo-blue.png";
-import logoCream from "@/assets/firebird-logo-cream.png";
+import logoBlue from "@/assets/firebird-emblem-blue.png";
+import logoCream from "@/assets/firebird-emblem-cream.png";
 
 const links = [
   { label: "Menu", to: "/menu" },
@@ -39,7 +39,7 @@ export function Navbar() {
           <img
             src={dark ? logoCream : logoBlue}
             alt="Firebird"
-            className="h-16 w-16 shrink-0 object-contain sm:h-20 sm:w-20"
+            className="h-16 w-16 shrink-0 rounded-full object-cover sm:h-20 sm:w-20"
             width={80}
             height={80}
           />
