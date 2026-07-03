@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Link } from "@tanstack/react-router";
-import logoBlue from "@/assets/firebird-logo-blue.png";
-import logoCream from "@/assets/firebird-logo-cream.png";
+import logoBlue from "@/assets/firebird-emblem-blue.png";
+import logoCream from "@/assets/firebird-emblem-cream.png";
 
 const links = [
   { label: "Menu", to: "/menu" },
