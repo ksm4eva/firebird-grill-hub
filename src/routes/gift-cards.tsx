@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { Gift, Mail, Check } from "lucide-react";
 import { PageShell, PageHero } from "@/components/firebird/PageShell";
-import logoCream from "@/assets/firebird-logo-cream.png";
+import logoCream from "@/assets/firebird-emblem-cream.png";
 
 export const Route = createFileRoute("/gift-cards")({
   head: () => ({

@@ -3,7 +3,7 @@ import { useEffect, useState, type ReactNode } from "react";
 import { LayoutDashboard, UtensilsCrossed, MapPin, Clock, FileText, ShoppingBag, Calendar, Sparkles, Award, Settings as SettingsIcon, LogOut, Menu, X, Flame, RotateCcw } from "lucide-react";
 import { isAdminLoggedIn, adminLogout } from "@/lib/adminAuth";
 import { useAdmin } from "@/lib/adminStore";
-import logoCream from "@/assets/firebird-logo-cream.png";
+import logoCream from "@/assets/firebird-emblem-cream.png";
 
 const navItems: { to: string; label: string; icon: typeof LayoutDashboard; exact?: boolean }[] = [
   { to: "/admin", label: "Dashboard", icon: LayoutDashboard, exact: true },

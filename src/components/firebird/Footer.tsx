@@ -1,6 +1,6 @@
 import { Instagram, Facebook, Twitter, Shield } from "lucide-react";
 import { Link } from "@tanstack/react-router";
-import logoCream from "@/assets/firebird-logo-cream.png";
+import logoCream from "@/assets/firebird-emblem-cream.png";
 import { useAdmin } from "@/lib/adminStore";
 
 type Col = { title: string; items: { label: string; to: string }[] };

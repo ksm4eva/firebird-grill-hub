@@ -2,7 +2,7 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
 import { Flame, Lock } from "lucide-react";
 import { adminLogin, isAdminLoggedIn } from "@/lib/adminAuth";
-import logoCream from "@/assets/firebird-logo-cream.png";
+import logoCream from "@/assets/firebird-emblem-cream.png";
 
 export const Route = createFileRoute("/admin/login")({
   component: LoginPage,
