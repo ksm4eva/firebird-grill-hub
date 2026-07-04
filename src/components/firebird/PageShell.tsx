@@ -1,8 +1,57 @@
-import type { ReactNode } from "react";
+import { useEffect, type ReactNode } from "react";
+import { useRouterState } from "@tanstack/react-router";
 import { Navbar } from "./Navbar";
 import { Footer } from "./Footer";
 
+const VARIANTS = ["fade-up", "fade-left", "zoom", "blur", "fade-right", "tilt"] as const;
+
+function useSectionReveal() {
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const sections = Array.from(
+      document.querySelectorAll<HTMLElement>("main section"),
+    );
+    if (sections.length === 0) return;
+
+    if (prefersReduced) {
+      sections.forEach((s) => s.classList.add("is-revealed"));
+      return;
+    }
+
+    sections.forEach((s, i) => {
+      if (!s.dataset.reveal) s.dataset.reveal = VARIANTS[i % VARIANTS.length];
+      // First section (hero) shows immediately for a smooth entry
+      if (i === 0) {
+        requestAnimationFrame(() => s.classList.add("is-revealed"));
+      }
+    });
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add("is-revealed");
+            io.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -8% 0px" },
+    );
+
+    sections.forEach((s, i) => {
+      if (i === 0) return;
+      io.observe(s);
+    });
+
+    return () => io.disconnect();
+  }, [pathname]);
+}
+
 export function PageShell({ children }: { children: ReactNode }) {
+  useSectionReveal();
   return (
     <div className="min-h-screen bg-[var(--cream)] text-[var(--ink)]">
       <Navbar />
