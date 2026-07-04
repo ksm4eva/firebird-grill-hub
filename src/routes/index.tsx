@@ -6,8 +6,8 @@ import { Footer } from "@/components/firebird/Footer";
 import { useAdmin } from "@/lib/adminStore";
 import { formatGHS } from "@/lib/format";
 
-import logoBlue from "@/assets/firebird-logo-blue.png";
-import logoCream from "@/assets/firebird-logo-cream.png";
+import logoBlue from "@/assets/firebird-emblem-blue.png";
+import logoCream from "@/assets/firebird-emblem-cream.png";
 import heroBurger from "@/assets/hero-burger.jpg";
 import galleryInterior from "@/assets/gallery-interior.jpg";
 import galleryGrill from "@/assets/gallery-grill.jpg";

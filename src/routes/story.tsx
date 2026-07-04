@@ -4,7 +4,7 @@ import { PageShell, PageHero } from "@/components/firebird/PageShell";
 import { useAdmin } from "@/lib/adminStore";
 import galleryGrill from "@/assets/gallery-grill.jpg";
 import galleryInterior from "@/assets/gallery-interior.jpg";
-import logoCream from "@/assets/firebird-logo-cream.png";
+import logoCream from "@/assets/firebird-emblem-cream.png";
 
 export const Route = createFileRoute("/story")({
   head: () => ({
