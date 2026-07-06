@@ -77,29 +77,31 @@ function Hero() {
       <div aria-hidden className="pointer-events-none absolute -left-40 bottom-0 h-[500px] w-[500px] rounded-full blur-3xl opacity-25 z-[1]" style={{ background: "radial-gradient(closest-side, #1147D1, transparent 70%)" }} />
 
       <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-10 px-6 lg:grid-cols-12 lg:px-10">
-        <div className="lg:col-span-6 animate-rise">
-          <div className="inline-flex items-center gap-2 rounded-full border border-[var(--cream)]/25 bg-white/10 px-4 py-2 text-xs font-bold uppercase tracking-widest text-[var(--cream)] backdrop-blur">
+        <div className="lg:col-span-6">
+          <div className="hero-reveal inline-flex items-center gap-2 rounded-full border border-[var(--cream)]/25 bg-white/10 px-4 py-2 text-xs font-bold uppercase tracking-widest text-[var(--cream)] backdrop-blur" style={{ ["--hero-delay" as string]: "1.5s" }}>
             <Flame size={14} className="text-[var(--accent)]" />
             {h.eyebrow}
           </div>
 
           <h1 className="text-display mt-6 text-5xl text-[var(--cream)] sm:text-7xl lg:text-[7.5rem] drop-shadow-[0_6px_30px_rgba(0,0,0,0.55)]">
-            {h.titleLine1} <span className="text-[var(--accent)]">{h.titleAccent}</span>
+            <span className="hero-reveal inline-block" style={{ ["--hero-delay" as string]: "1.7s" }}>
+              {h.titleLine1} <span className="text-[var(--accent)]">{h.titleAccent}</span>
+            </span>
             <br />
-            <span className="relative inline-block">
+            <span className="hero-reveal relative inline-block" style={{ ["--hero-delay" as string]: "1.95s" }}>
               {h.titleLine2}
               <span aria-hidden className="absolute -bottom-2 left-0 h-3 w-full rounded-full bg-[var(--accent)]" style={{ clipPath: "polygon(0 30%,100% 0,100% 70%,0 100%)" }} />
             </span>
           </h1>
 
-          <p className="mt-7 max-w-xl text-base leading-relaxed text-[var(--cream)]/85 sm:text-lg">{h.subtitle}</p>
+          <p className="hero-reveal mt-7 max-w-xl text-base leading-relaxed text-[var(--cream)]/85 sm:text-lg" style={{ ["--hero-delay" as string]: "2.2s" }}>{h.subtitle}</p>
 
-          <div className="mt-9 flex flex-wrap items-center gap-4">
+          <div className="hero-reveal mt-9 flex flex-wrap items-center gap-4" style={{ ["--hero-delay" as string]: "2.45s" }}>
             <Link to="/menu" className="btn-primary">View Menu <ArrowRight size={16} /></Link>
             <Link to="/order" className="btn-ghost-cream">Order Now</Link>
           </div>
 
-          <div className="mt-12 flex flex-wrap items-center gap-8 text-xs uppercase tracking-widest text-[var(--cream)]/70">
+          <div className="hero-reveal mt-12 flex flex-wrap items-center gap-8 text-xs uppercase tracking-widest text-[var(--cream)]/70" style={{ ["--hero-delay" as string]: "2.7s" }}>
             <Stat value="4.9★" label="2,400+ reviews" />
             <Divider />
             <Stat value="100%" label="Fresh daily" />
@@ -110,12 +112,12 @@ function Hero() {
 
         <div className="relative lg:col-span-6">
           <div className="relative mx-auto aspect-square w-full max-w-[620px]">
-            <div aria-hidden className="absolute inset-6 rounded-full bg-gradient-flame opacity-90 blur-2xl animate-flame" />
-            <img src={featured?.img ?? heroBurger} alt={featured?.name ?? "Firebird signature burger"} width={1280} height={1280} className="relative z-10 h-full w-full object-contain drop-shadow-[0_40px_60px_rgba(0,0,0,0.55)] animate-hero-spin" />
-            <div className="absolute right-[18%] top-[14%] z-20 flex h-16 w-16 items-center justify-center rounded-2xl bg-[var(--primary)] shadow-soft rotate-[8deg] animate-float" style={{ animationDelay: "1.5s" }}>
+            <div aria-hidden className="animate-hero-glow absolute inset-6 rounded-full bg-gradient-flame blur-2xl" />
+            <img src={featured?.img ?? heroBurger} alt={featured?.name ?? "Firebird signature burger"} width={1280} height={1280} className="animate-hero-spin relative z-10 h-full w-full object-contain drop-shadow-[0_40px_60px_rgba(0,0,0,0.55)]" />
+            <div className="animate-hero-badge absolute right-[18%] top-[14%] z-20 flex h-16 w-16 items-center justify-center rounded-2xl bg-[var(--primary)] shadow-soft" style={{ ["--hero-delay" as string]: "1.5s" }}>
               <img src={logoCream} alt="" className="h-10 w-10" width={40} height={40} />
             </div>
-            <div className="absolute -left-2 bottom-10 z-20 rounded-3xl bg-white/95 px-5 py-4 shadow-float backdrop-blur">
+            <div className="animate-hero-badge absolute -left-2 bottom-10 z-20 rounded-3xl bg-white/95 px-5 py-4 shadow-float backdrop-blur" style={{ ["--hero-delay" as string]: "1.75s" }}>
               <p className="text-[10px] uppercase tracking-widest text-[var(--ink)]/60">{featured?.tag ?? "Signature"}</p>
               <p className="text-display text-2xl text-[var(--primary)]">{formatGHS(featured?.price ?? 85)}</p>
             </div>

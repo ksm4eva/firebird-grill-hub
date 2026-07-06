@@ -467,11 +467,52 @@
   50%  { transform: rotate(180deg) translateY(-14px); }
   100% { transform: rotate(360deg) translateY(0); }
 }
+@keyframes hero-burger-enter {
+  0%   { opacity: 0; transform: scale(0.15) rotate(-540deg) translateY(60px); filter: blur(18px); }
+  55%  { opacity: 1; transform: scale(1.14) rotate(-25deg) translateY(-10px); filter: blur(0); }
+  78%  { transform: scale(0.95) rotate(10deg) translateY(4px); }
+  100% { opacity: 1; transform: scale(1) rotate(0deg) translateY(0); filter: blur(0); }
+}
+@keyframes hero-glow-in {
+  0%   { opacity: 0; transform: scale(0.2); }
+  60%  { opacity: 0.9; transform: scale(1.18); }
+  100% { opacity: 0.9; transform: scale(1); }
+}
+@keyframes hero-text-in {
+  0%   { opacity: 0; transform: translateY(32px); filter: blur(10px); }
+  100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+@keyframes hero-badge-in {
+  0%   { opacity: 0; transform: scale(0.4) rotate(-30deg); }
+  70%  { opacity: 1; transform: scale(1.1) rotate(4deg); }
+  100% { opacity: 1; transform: scale(1) rotate(0); }
+}
 .animate-hero-spin {
-  animation: hero-spin 18s linear infinite;
+  animation:
+    hero-burger-enter 1.8s cubic-bezier(0.16, 1, 0.3, 1) both,
+    hero-spin 22s linear 1.8s infinite;
   transform-origin: 50% 50%;
-  will-change: transform;
+  will-change: transform, opacity, filter;
+}
+.animate-hero-glow {
+  animation: hero-glow-in 1.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  will-change: transform, opacity;
+}
+.animate-hero-badge {
+  animation: hero-badge-in 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  animation-delay: var(--hero-delay, 1.4s);
+  opacity: 0;
+  will-change: transform, opacity;
+}
+.hero-reveal {
+  opacity: 0;
+  animation: hero-text-in 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: var(--hero-delay, 0ms);
+  will-change: transform, opacity, filter;
 }
 @media (prefers-reduced-motion: reduce) {
-  .animate-hero-spin { animation: none; }
+  .animate-hero-spin,
+  .animate-hero-glow,
+  .animate-hero-badge,
+  .hero-reveal { animation: none; opacity: 1; }
 }
