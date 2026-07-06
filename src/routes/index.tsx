@@ -129,13 +129,13 @@ function Hero() {
 function Stat({ value, label }: { value: string; label: string }) {
   return (
     <div className="flex flex-col">
-      <span className="text-display text-2xl text-[var(--ink)] normal-case">{value}</span>
+      <span className="text-display text-2xl text-[var(--cream)] normal-case">{value}</span>
       <span>{label}</span>
     </div>
   );
 }
 function Divider() {
-  return <span className="h-8 w-px bg-[var(--ink)]/15" />;
+  return <span className="h-8 w-px bg-[var(--cream)]/25" />;
 }
 
 function Marquee() {
