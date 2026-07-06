@@ -56,19 +56,35 @@ function Hero() {
   const featured = state.menuItems.find((i) => i.featured && i.available) ?? state.menuItems[0];
 
   return (
-    <section id="home" className="relative overflow-hidden bg-[var(--cream)] pt-32 pb-16 lg:pt-40 lg:pb-24">
-      <div aria-hidden className="pointer-events-none absolute -right-40 top-10 h-[600px] w-[600px] rounded-full blur-3xl opacity-40 animate-flame" style={{ background: "radial-gradient(closest-side, #FF6A00, transparent 70%)" }} />
-      <div aria-hidden className="pointer-events-none absolute -left-40 bottom-0 h-[500px] w-[500px] rounded-full blur-3xl opacity-25" style={{ background: "radial-gradient(closest-side, #1147D1, transparent 70%)" }} />
+    <section id="home" className="relative overflow-hidden bg-[var(--ink)] pt-32 pb-16 lg:pt-40 lg:pb-24">
+      {/* Background video */}
+      <video
+        aria-hidden
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="auto"
+        poster={heroBurger}
+        className="pointer-events-none absolute inset-0 z-0 h-full w-full object-cover"
+      >
+        <source src={heroVideo.url} type="video/mp4" />
+      </video>
+      {/* Overlays for legibility */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 z-[1] bg-[var(--ink)]/55" />
+      <div aria-hidden className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-r from-[var(--ink)]/85 via-[var(--ink)]/40 to-transparent" />
+      <div aria-hidden className="pointer-events-none absolute -right-40 top-10 h-[600px] w-[600px] rounded-full blur-3xl opacity-40 animate-flame z-[1]" style={{ background: "radial-gradient(closest-side, #FF6A00, transparent 70%)" }} />
+      <div aria-hidden className="pointer-events-none absolute -left-40 bottom-0 h-[500px] w-[500px] rounded-full blur-3xl opacity-25 z-[1]" style={{ background: "radial-gradient(closest-side, #1147D1, transparent 70%)" }} />
 
-      <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-6 lg:grid-cols-12 lg:px-10">
+      <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-10 px-6 lg:grid-cols-12 lg:px-10">
         <div className="lg:col-span-6 animate-rise">
-          <div className="inline-flex items-center gap-2 rounded-full border border-[var(--primary)]/20 bg-white/60 px-4 py-2 text-xs font-bold uppercase tracking-widest text-[var(--primary)] backdrop-blur">
+          <div className="inline-flex items-center gap-2 rounded-full border border-[var(--cream)]/25 bg-white/10 px-4 py-2 text-xs font-bold uppercase tracking-widest text-[var(--cream)] backdrop-blur">
             <Flame size={14} className="text-[var(--accent)]" />
             {h.eyebrow}
           </div>
 
-          <h1 className="text-display mt-6 text-5xl text-[var(--ink)] sm:text-7xl lg:text-[7.5rem]">
-            {h.titleLine1} <span className="text-[var(--primary)]">{h.titleAccent}</span>
+          <h1 className="text-display mt-6 text-5xl text-[var(--cream)] sm:text-7xl lg:text-[7.5rem] drop-shadow-[0_6px_30px_rgba(0,0,0,0.55)]">
+            {h.titleLine1} <span className="text-[var(--accent)]">{h.titleAccent}</span>
             <br />
             <span className="relative inline-block">
               {h.titleLine2}
