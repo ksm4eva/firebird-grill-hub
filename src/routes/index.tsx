@@ -9,7 +9,7 @@ import { formatGHS } from "@/lib/format";
 import logoBlue from "@/assets/firebird-emblem-blue.png";
 import logoCream from "@/assets/firebird-emblem-cream.png";
 import heroBurger from "@/assets/hero-burger.jpg";
-import heroVideo from "@/assets/hero-burger.mp4.asset.json";
+import heroBurgerLayers from "@/assets/hero-burger-layers.jpg.asset.json";
 import galleryInterior from "@/assets/gallery-interior.jpg";
 import galleryGrill from "@/assets/gallery-grill.jpg";
 import galleryFries from "@/assets/gallery-fries.jpg";
@@ -56,34 +56,20 @@ function Hero() {
   const featured = state.menuItems.find((i) => i.featured && i.available) ?? state.menuItems[0];
 
   return (
-    <section id="home" className="relative overflow-hidden bg-[var(--ink)] pt-32 pb-16 lg:pt-40 lg:pb-24">
-      {/* Background video */}
-      <video
-        aria-hidden
-        autoPlay
-        loop
-        muted
-        playsInline
-        preload="auto"
-        poster={heroBurger}
-        className="pointer-events-none absolute inset-0 z-0 h-full w-full object-cover"
-      >
-        <source src={heroVideo.url} type="video/mp4" />
-      </video>
-      {/* Overlays for legibility */}
-      <div aria-hidden className="pointer-events-none absolute inset-0 z-[1] bg-[var(--ink)]/55" />
-      <div aria-hidden className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-r from-[var(--ink)]/85 via-[var(--ink)]/40 to-transparent" />
-      <div aria-hidden className="pointer-events-none absolute -right-40 top-10 h-[600px] w-[600px] rounded-full blur-3xl opacity-40 animate-flame z-[1]" style={{ background: "radial-gradient(closest-side, #FF6A00, transparent 70%)" }} />
-      <div aria-hidden className="pointer-events-none absolute -left-40 bottom-0 h-[500px] w-[500px] rounded-full blur-3xl opacity-25 z-[1]" style={{ background: "radial-gradient(closest-side, #1147D1, transparent 70%)" }} />
+    <section id="home" className="relative overflow-hidden bg-[var(--primary)] pt-32 pb-16 lg:pt-40 lg:pb-24">
+      {/* Vibrant orange glows */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 z-0" style={{ background: "radial-gradient(ellipse at 30% 20%, #FF8A2B 0%, transparent 55%), radial-gradient(ellipse at 80% 80%, #FF6A00 0%, transparent 60%), var(--primary)" }} />
+      <div aria-hidden className="pointer-events-none absolute -right-40 top-10 h-[600px] w-[600px] rounded-full blur-3xl opacity-50 animate-flame z-[1]" style={{ background: "radial-gradient(closest-side, #FFB347, transparent 70%)" }} />
+      <div aria-hidden className="pointer-events-none absolute -left-40 bottom-0 h-[500px] w-[500px] rounded-full blur-3xl opacity-30 z-[1]" style={{ background: "radial-gradient(closest-side, #FFD27A, transparent 70%)" }} />
 
       <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-10 px-6 lg:grid-cols-12 lg:px-10">
         <div className="lg:col-span-6">
-          <div className="hero-reveal inline-flex items-center gap-2 rounded-full border border-[var(--cream)]/25 bg-white/10 px-4 py-2 text-xs font-bold uppercase tracking-widest text-[var(--cream)] backdrop-blur" style={{ ["--hero-delay" as string]: "1.5s" }}>
+          <div className="hero-reveal inline-flex items-center gap-2 rounded-full border border-[var(--cream)]/30 bg-white/15 px-4 py-2 text-xs font-bold uppercase tracking-widest text-[var(--cream)] backdrop-blur" style={{ ["--hero-delay" as string]: "1.5s" }}>
             <Flame size={14} className="text-[var(--accent)]" />
             {h.eyebrow}
           </div>
 
-          <h1 className="text-display mt-6 text-5xl text-[var(--cream)] sm:text-7xl lg:text-[7.5rem] drop-shadow-[0_6px_30px_rgba(0,0,0,0.55)]">
+          <h1 className="text-display mt-6 text-5xl text-[var(--cream)] sm:text-7xl lg:text-[7.5rem] drop-shadow-[0_6px_30px_rgba(0,0,0,0.35)]">
             <span className="hero-reveal inline-block" style={{ ["--hero-delay" as string]: "1.7s" }}>
               {h.titleLine1} <span className="text-[var(--accent)]">{h.titleAccent}</span>
             </span>
@@ -94,14 +80,14 @@ function Hero() {
             </span>
           </h1>
 
-          <p className="hero-reveal mt-7 max-w-xl text-base leading-relaxed text-[var(--cream)]/85 sm:text-lg" style={{ ["--hero-delay" as string]: "2.2s" }}>{h.subtitle}</p>
+          <p className="hero-reveal mt-7 max-w-xl text-base leading-relaxed text-[var(--cream)]/90 sm:text-lg" style={{ ["--hero-delay" as string]: "2.2s" }}>{h.subtitle}</p>
 
           <div className="hero-reveal mt-9 flex flex-wrap items-center gap-4" style={{ ["--hero-delay" as string]: "2.45s" }}>
-            <Link to="/menu" className="btn-primary">View Menu <ArrowRight size={16} /></Link>
+            <Link to="/menu" className="btn-flame">View Menu <ArrowRight size={16} /></Link>
             <Link to="/order" className="btn-ghost-cream">Order Now</Link>
           </div>
 
-          <div className="hero-reveal mt-12 flex flex-wrap items-center gap-8 text-xs uppercase tracking-widest text-[var(--cream)]/70" style={{ ["--hero-delay" as string]: "2.7s" }}>
+          <div className="hero-reveal mt-12 flex flex-wrap items-center gap-8 text-xs uppercase tracking-widest text-[var(--cream)]/80" style={{ ["--hero-delay" as string]: "2.7s" }}>
             <Stat value="4.9★" label="2,400+ reviews" />
             <Divider />
             <Stat value="100%" label="Fresh daily" />
@@ -111,13 +97,34 @@ function Hero() {
         </div>
 
         <div className="relative lg:col-span-6">
-          <div className="relative mx-auto aspect-square w-full max-w-[620px]">
-            <div aria-hidden className="animate-hero-glow absolute inset-6 rounded-full bg-gradient-flame blur-2xl" />
-            <img src={featured?.img ?? heroBurger} alt={featured?.name ?? "Firebird signature burger"} width={1280} height={1280} className="animate-hero-spin relative z-10 h-full w-full object-contain drop-shadow-[0_40px_60px_rgba(0,0,0,0.55)]" />
-            <div className="animate-hero-badge absolute right-[18%] top-[14%] z-20 flex h-16 w-16 items-center justify-center rounded-2xl bg-[var(--primary)] shadow-soft" style={{ ["--hero-delay" as string]: "1.5s" }}>
+          <div className="burger-stack relative mx-auto aspect-square w-full max-w-[620px]">
+            <div aria-hidden className="absolute inset-6 rounded-full bg-[radial-gradient(closest-side,#FFD27A,transparent_70%)] blur-2xl opacity-70" />
+            {/* Layer-by-layer 4K burger reveal */}
+            {[
+              { clip: "polygon(0 0, 100% 0, 100% 30%, 0 30%)", delay: "1.2s" },      // top bun + sesame
+              { clip: "polygon(0 30%, 100% 30%, 100% 46%, 0 46%)", delay: "1.55s" }, // lettuce + tomato
+              { clip: "polygon(0 46%, 100% 46%, 100% 62%, 0 62%)", delay: "1.9s" },  // cheese + top patty
+              { clip: "polygon(0 62%, 100% 62%, 100% 80%, 0 80%)", delay: "2.25s" }, // bottom patty + cheese
+              { clip: "polygon(0 80%, 100% 80%, 100% 100%, 0 100%)", delay: "2.6s" },// bottom bun
+            ].map((l, i) => (
+              <img
+                key={i}
+                src={heroBurgerLayers.url}
+                alt=""
+                aria-hidden={i > 0}
+                width={2048}
+                height={2048}
+                className="burger-layer drop-shadow-[0_30px_50px_rgba(0,0,0,0.35)]"
+                style={{ clipPath: l.clip, ["--layer-delay" as string]: l.delay }}
+              />
+            ))}
+            {/* Accessible label layer (full image, invisible clip already covers) */}
+            <img src={heroBurgerLayers.url} alt={featured?.name ?? "Firebird signature burger"} className="sr-only" />
+
+            <div className="animate-hero-badge absolute right-[10%] top-[8%] z-20 flex h-16 w-16 items-center justify-center rounded-2xl bg-[var(--ink)] shadow-soft" style={{ ["--hero-delay" as string]: "3.1s" }}>
               <img src={logoCream} alt="" className="h-10 w-10" width={40} height={40} />
             </div>
-            <div className="animate-hero-badge absolute -left-2 bottom-10 z-20 rounded-3xl bg-white/95 px-5 py-4 shadow-float backdrop-blur" style={{ ["--hero-delay" as string]: "1.75s" }}>
+            <div className="animate-hero-badge absolute -left-2 bottom-8 z-20 rounded-3xl bg-white/95 px-5 py-4 shadow-float backdrop-blur" style={{ ["--hero-delay" as string]: "3.3s" }}>
               <p className="text-[10px] uppercase tracking-widest text-[var(--ink)]/60">{featured?.tag ?? "Signature"}</p>
               <p className="text-display text-2xl text-[var(--primary)]">{formatGHS(featured?.price ?? 85)}</p>
             </div>
