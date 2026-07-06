@@ -460,3 +460,18 @@
     filter: none;
   }
 }
+
+/* ---------- Hero burger spin (Firebird) ---------- */
+@keyframes hero-spin {
+  0%   { transform: rotate(0deg) translateY(0); }
+  50%  { transform: rotate(180deg) translateY(-14px); }
+  100% { transform: rotate(360deg) translateY(0); }
+}
+.animate-hero-spin {
+  animation: hero-spin 18s linear infinite;
+  transform-origin: 50% 50%;
+  will-change: transform;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-hero-spin { animation: none; }
+}
