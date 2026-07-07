@@ -55,72 +55,190 @@ function Index() {
 
 function Hero() {
   const { state } = useAdmin();
-  const h = state.siteContent.hero;
   const featured = state.menuItems.find((i) => i.featured && i.available) ?? state.menuItems[0];
 
+  const sectionRef = useRef<HTMLElement>(null);
+  const mx = useMotionValue(0);
+  const my = useMotionValue(0);
+  const spring = { stiffness: 120, damping: 18, mass: 0.6 };
+  const sx = useSpring(mx, spring);
+  const sy = useSpring(my, spring);
+
+  const burgerX = useTransform(sx, (v) => v * 20);
+  const burgerY = useTransform(sy, (v) => v * 20);
+  const burgerRotY = useTransform(sx, (v) => v * 6);
+  const burgerRotX = useTransform(sy, (v) => v * -6);
+  const juicyX = useTransform(sx, (v) => v * 8);
+  const juicyY = useTransform(sy, (v) => v * 8);
+  const particleX = useTransform(sx, (v) => v * 12);
+  const particleY = useTransform(sy, (v) => v * 12);
+
+  const onMouseMove = (e: React.MouseEvent<HTMLElement>) => {
+    const rect = sectionRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    const nx = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
+    const ny = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
+    mx.set(nx);
+    my.set(ny);
+  };
+  const onMouseLeave = () => { mx.set(0); my.set(0); };
+
+  const particles = Array.from({ length: 18 }, (_, i) => ({
+    id: i,
+    top: `${(i * 53) % 100}%`,
+    left: `${(i * 37) % 100}%`,
+    size: 3 + (i % 4) * 2,
+    dx: `${((i % 5) - 2) * 40}px`,
+    dy: `${-40 - (i % 6) * 30}px`,
+    dur: `${6 + (i % 5) * 2}s`,
+    delay: `${(i * 0.3) % 4}s`,
+  }));
+
+  const ease = [0.16, 1, 0.3, 1] as const;
+
   return (
-    <section id="home" className="relative overflow-hidden bg-[var(--primary)] pt-32 pb-16 lg:pt-40 lg:pb-24">
-      {/* Vibrant orange glows */}
-      <div aria-hidden className="pointer-events-none absolute inset-0 z-0" style={{ background: "radial-gradient(ellipse at 30% 20%, #FF8A2B 0%, transparent 55%), radial-gradient(ellipse at 80% 80%, #FF6A00 0%, transparent 60%), var(--primary)" }} />
-      <div aria-hidden className="pointer-events-none absolute -right-40 top-10 h-[600px] w-[600px] rounded-full blur-3xl opacity-50 animate-flame z-[1]" style={{ background: "radial-gradient(closest-side, #FFB347, transparent 70%)" }} />
-      <div aria-hidden className="pointer-events-none absolute -left-40 bottom-0 h-[500px] w-[500px] rounded-full blur-3xl opacity-30 z-[1]" style={{ background: "radial-gradient(closest-side, #FFD27A, transparent 70%)" }} />
+    <section
+      id="home"
+      ref={sectionRef}
+      onMouseMove={onMouseMove}
+      onMouseLeave={onMouseLeave}
+      className="hero-v2 relative min-h-screen overflow-hidden flex items-center pt-28 pb-16 lg:pt-32 lg:pb-20"
+    >
+      {/* Floating particles layer */}
+      <motion.div
+        aria-hidden
+        style={{ x: particleX, y: particleY }}
+        className="pointer-events-none absolute inset-0 z-[1]"
+      >
+        {particles.map((p) => (
+          <span
+            key={p.id}
+            className="hero-particle"
+            style={{
+              top: p.top,
+              left: p.left,
+              width: p.size,
+              height: p.size,
+              ["--dx" as string]: p.dx,
+              ["--dy" as string]: p.dy,
+              ["--dur" as string]: p.dur,
+              ["--delay" as string]: p.delay,
+            }}
+          />
+        ))}
+      </motion.div>
 
-      <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-10 px-6 lg:grid-cols-12 lg:px-10">
-        <div className="lg:col-span-6">
-          <div className="hero-reveal inline-flex items-center gap-2 rounded-full border border-[var(--cream)]/30 bg-white/15 px-4 py-2 text-xs font-bold uppercase tracking-widest text-[var(--cream)] backdrop-blur" style={{ ["--hero-delay" as string]: "1.5s" }}>
-            <Flame size={14} className="text-[var(--accent)]" />
-            {h.eyebrow}
-          </div>
+      {/* Giant JUICY word */}
+      <motion.span
+        aria-hidden
+        style={{ x: juicyX, y: juicyY }}
+        className="juicy-word z-[2]"
+      >
+        JUICY
+      </motion.span>
 
-          <h1 className="text-display mt-6 text-5xl text-[var(--cream)] sm:text-7xl lg:text-[7.5rem] drop-shadow-[0_6px_30px_rgba(0,0,0,0.35)]">
-            <span className="hero-reveal inline-block" style={{ ["--hero-delay" as string]: "1.7s" }}>
-              {h.titleLine1} <span className="text-[var(--accent)]">{h.titleAccent}</span>
-            </span>
+      <div className="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-12 px-6 lg:grid-cols-[minmax(0,4fr)_minmax(0,6fr)] lg:gap-8 lg:px-10">
+        {/* LEFT — content */}
+        <div className="relative">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.9, delay: 0.2, ease }}
+            className="flex items-center gap-3 text-xs font-bold uppercase tracking-[0.35em] text-white/90"
+          >
+            <span className="block h-px w-14 bg-white/80" />
+            100% Premium Beef
+          </motion.div>
+
+          <motion.h1
+            initial={{ opacity: 0, x: -60, filter: "blur(10px)" }}
+            animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+            transition={{ duration: 1, delay: 0.35, ease }}
+            className="font-bebas mt-6 text-white leading-[0.9] text-6xl sm:text-7xl lg:text-8xl xl:text-9xl drop-shadow-[0_8px_24px_rgba(0,0,0,0.35)]"
+          >
+            BIG FLAVOR.
             <br />
-            <span className="hero-reveal relative inline-block" style={{ ["--hero-delay" as string]: "1.95s" }}>
-              {h.titleLine2}
-              <span aria-hidden className="absolute -bottom-2 left-0 h-3 w-full rounded-full bg-[var(--accent)]" style={{ clipPath: "polygon(0 30%,100% 0,100% 70%,0 100%)" }} />
-            </span>
-          </h1>
+            BIGGER
+            <br />
+            CRAVINGS.
+          </motion.h1>
 
-          <p className="hero-reveal mt-7 max-w-xl text-base leading-relaxed text-[var(--cream)]/90 sm:text-lg" style={{ ["--hero-delay" as string]: "2.2s" }}>{h.subtitle}</p>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.7, ease }}
+            className="mt-6 max-w-md text-base leading-relaxed text-white/85 sm:text-lg"
+          >
+            Crafted with premium ingredients, flame-grilled to perfection and packed with bold unforgettable flavor.
+          </motion.p>
 
-          <div className="hero-reveal mt-9 flex flex-wrap items-center gap-4" style={{ ["--hero-delay" as string]: "2.45s" }}>
-            <Link to="/menu" className="btn-flame">View Menu <ArrowRight size={16} /></Link>
-            <Link to="/order" className="btn-ghost-cream">Order Now</Link>
-          </div>
+          <motion.div
+            initial="hidden"
+            animate="show"
+            variants={{
+              hidden: {},
+              show: { transition: { staggerChildren: 0.12, delayChildren: 0.9 } },
+            }}
+            className="mt-9 flex flex-wrap items-center gap-4"
+          >
+            {[
+              <Link key="reserve" to="/reservations" className="btn-primary-orange">
+                Reserve a Table <ArrowRight size={16} />
+              </Link>,
+              <Link key="menu" to="/menu" className="btn-ghost-white">
+                Explore Menu
+              </Link>,
+            ].map((child, i) => (
+              <motion.div
+                key={i}
+                variants={{
+                  hidden: { opacity: 0, y: 16 },
+                  show: { opacity: 1, y: 0, transition: { duration: 0.7, ease } },
+                }}
+              >
+                {child}
+              </motion.div>
+            ))}
+          </motion.div>
 
-          <div className="hero-reveal mt-12 flex flex-wrap items-center gap-8 text-xs uppercase tracking-widest text-[var(--cream)]/80" style={{ ["--hero-delay" as string]: "2.7s" }}>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 1.3, ease }}
+            className="mt-10 flex flex-wrap items-center gap-6 text-[10px] uppercase tracking-[0.25em] text-white/70"
+          >
             <Stat value="4.9★" label="2,400+ reviews" />
             <Divider />
             <Stat value="100%" label="Fresh daily" />
             <Divider />
             <Stat value="15 min" label="Avg. pickup" />
-          </div>
+          </motion.div>
         </div>
 
-        <div className="relative lg:col-span-6">
-          <div className="burger-stack relative mx-auto w-full max-w-[720px]">
-            <div aria-hidden className="absolute inset-4 rounded-[2.5rem] bg-[radial-gradient(closest-side,#FFD27A,transparent_70%)] blur-2xl opacity-70" />
-            <img
-              src={heroBurgerLayers.url}
-              alt={featured?.name ?? "Firebird signature juicy burger"}
+        {/* RIGHT — burger */}
+        <div className="relative flex items-center justify-center" style={{ perspective: 1200 }}>
+          <motion.div
+            style={{
+              x: burgerX,
+              y: burgerY,
+              rotateY: burgerRotY,
+              rotateX: burgerRotX,
+              transformStyle: "preserve-3d",
+            }}
+            className="burger-v2-float relative w-full max-w-[720px]"
+          >
+            <div aria-hidden className="absolute inset-6 rounded-full bg-[radial-gradient(closest-side,rgba(255,210,122,0.55),transparent_70%)] blur-3xl" />
+            <motion.img
+              src={heroBurgerOnly.url}
+              alt={featured?.name ?? "Firebird signature juicy double cheeseburger"}
               width={1920}
-              height={1080}
-              className="hero-burger-hero relative z-10 w-full rounded-[2rem] object-cover drop-shadow-[0_30px_50px_rgba(0,0,0,0.35)]"
-              style={{ ["--hero-delay" as string]: "1.2s" }}
+              height={1920}
+              className="burger-v2-enter relative z-10 w-full drop-shadow-[0_50px_60px_rgba(0,0,0,0.45)]"
+              whileHover={{ scale: 1.04 }}
+              transition={{ type: "spring", stiffness: 200, damping: 18 }}
             />
-
-            <div className="animate-hero-badge absolute right-[6%] top-[6%] z-20 flex h-16 w-16 items-center justify-center rounded-2xl bg-[var(--ink)] shadow-soft" style={{ ["--hero-delay" as string]: "3.1s" }}>
-              <img src={logoCream} alt="" className="h-10 w-10" width={40} height={40} />
-            </div>
-            <div className="animate-hero-badge absolute -left-2 bottom-6 z-20 rounded-3xl bg-white/95 px-5 py-4 shadow-float backdrop-blur" style={{ ["--hero-delay" as string]: "3.3s" }}>
-              <p className="text-[10px] uppercase tracking-widest text-[var(--ink)]/60">{featured?.tag ?? "Signature"}</p>
-              <p className="text-display text-2xl text-[var(--primary)]">{formatGHS(featured?.price ?? 85)}</p>
-            </div>
-          </div>
+          </motion.div>
         </div>
-
       </div>
     </section>
   );
