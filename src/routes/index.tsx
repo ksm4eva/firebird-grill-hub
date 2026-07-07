@@ -97,39 +97,27 @@ function Hero() {
         </div>
 
         <div className="relative lg:col-span-6">
-          <div className="burger-stack relative mx-auto aspect-square w-full max-w-[620px]">
-            <div aria-hidden className="absolute inset-6 rounded-full bg-[radial-gradient(closest-side,#FFD27A,transparent_70%)] blur-2xl opacity-70" />
-            {/* Layer-by-layer 4K burger reveal */}
-            {[
-              { clip: "polygon(0 0, 100% 0, 100% 30%, 0 30%)", delay: "1.2s" },      // top bun + sesame
-              { clip: "polygon(0 30%, 100% 30%, 100% 46%, 0 46%)", delay: "1.55s" }, // lettuce + tomato
-              { clip: "polygon(0 46%, 100% 46%, 100% 62%, 0 62%)", delay: "1.9s" },  // cheese + top patty
-              { clip: "polygon(0 62%, 100% 62%, 100% 80%, 0 80%)", delay: "2.25s" }, // bottom patty + cheese
-              { clip: "polygon(0 80%, 100% 80%, 100% 100%, 0 100%)", delay: "2.6s" },// bottom bun
-            ].map((l, i) => (
-              <img
-                key={i}
-                src={heroBurgerLayers.url}
-                alt=""
-                aria-hidden={i > 0}
-                width={2048}
-                height={2048}
-                className="burger-layer drop-shadow-[0_30px_50px_rgba(0,0,0,0.35)]"
-                style={{ clipPath: l.clip, ["--layer-delay" as string]: l.delay }}
-              />
-            ))}
-            {/* Accessible label layer (full image, invisible clip already covers) */}
-            <img src={heroBurgerLayers.url} alt={featured?.name ?? "Firebird signature burger"} className="sr-only" />
+          <div className="burger-stack relative mx-auto w-full max-w-[720px]">
+            <div aria-hidden className="absolute inset-4 rounded-[2.5rem] bg-[radial-gradient(closest-side,#FFD27A,transparent_70%)] blur-2xl opacity-70" />
+            <img
+              src={heroBurgerLayers.url}
+              alt={featured?.name ?? "Firebird signature juicy burger"}
+              width={1920}
+              height={1080}
+              className="hero-burger-hero relative z-10 w-full rounded-[2rem] object-cover drop-shadow-[0_30px_50px_rgba(0,0,0,0.35)]"
+              style={{ ["--hero-delay" as string]: "1.2s" }}
+            />
 
-            <div className="animate-hero-badge absolute right-[10%] top-[8%] z-20 flex h-16 w-16 items-center justify-center rounded-2xl bg-[var(--ink)] shadow-soft" style={{ ["--hero-delay" as string]: "3.1s" }}>
+            <div className="animate-hero-badge absolute right-[6%] top-[6%] z-20 flex h-16 w-16 items-center justify-center rounded-2xl bg-[var(--ink)] shadow-soft" style={{ ["--hero-delay" as string]: "3.1s" }}>
               <img src={logoCream} alt="" className="h-10 w-10" width={40} height={40} />
             </div>
-            <div className="animate-hero-badge absolute -left-2 bottom-8 z-20 rounded-3xl bg-white/95 px-5 py-4 shadow-float backdrop-blur" style={{ ["--hero-delay" as string]: "3.3s" }}>
+            <div className="animate-hero-badge absolute -left-2 bottom-6 z-20 rounded-3xl bg-white/95 px-5 py-4 shadow-float backdrop-blur" style={{ ["--hero-delay" as string]: "3.3s" }}>
               <p className="text-[10px] uppercase tracking-widest text-[var(--ink)]/60">{featured?.tag ?? "Signature"}</p>
               <p className="text-display text-2xl text-[var(--primary)]">{formatGHS(featured?.price ?? 85)}</p>
             </div>
           </div>
         </div>
+
       </div>
     </section>
   );
