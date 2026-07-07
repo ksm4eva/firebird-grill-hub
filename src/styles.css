@@ -537,6 +537,6 @@
   .animate-hero-glow,
   .animate-hero-badge,
   .hero-reveal,
-  .burger-layer,
+  .hero-burger-hero,
   .burger-stack { animation: none; opacity: 1; }
 }
