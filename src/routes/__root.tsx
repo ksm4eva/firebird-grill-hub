@@ -12,7 +12,6 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { AdminProvider } from "../lib/adminStore";
-import { SplashLoader } from "../components/SplashLoader";
 
 function NotFoundComponent() {
   return (
@@ -121,7 +120,6 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <AdminProvider>
-        <SplashLoader />
         <Outlet />
       </AdminProvider>
     </QueryClientProvider>
