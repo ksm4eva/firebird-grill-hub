@@ -12,6 +12,7 @@ import logoBlue from "@/assets/firebird-emblem-blue.png";
 import logoCream from "@/assets/firebird-emblem-cream.png";
 import heroBurger from "@/assets/hero-burger.jpg";
 import heroBurgerLayers from "@/assets/hero-burger-layers.jpg.asset.json";
+import heroBurgerOnly from "@/assets/hero-burger-only.png.asset.json";
 import galleryInterior from "@/assets/gallery-interior.jpg";
 import galleryGrill from "@/assets/gallery-grill.jpg";
 import galleryFries from "@/assets/gallery-fries.jpg";
