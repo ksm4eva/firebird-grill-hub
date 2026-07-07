@@ -28,9 +28,9 @@ export function Navbar() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 animate-[hero-text-in_0.8s_cubic-bezier(0.16,1,0.3,1)_both] ${
         dark
-          ? "bg-[var(--primary)] shadow-[0_10px_40px_-10px_rgba(17,71,209,0.45)]"
+          ? "bg-[var(--primary)]/80 backdrop-blur-xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.35)] border-b border-white/10"
           : "bg-transparent"
       }`}
     >
