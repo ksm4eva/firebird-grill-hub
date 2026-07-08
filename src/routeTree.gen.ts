@@ -37,6 +37,7 @@ import { Route as AdminLocationsRouteImport } from './routes/admin.locations'
 import { Route as AdminHoursRouteImport } from './routes/admin.hours'
 import { Route as AdminGalleryRouteImport } from './routes/admin.gallery'
 import { Route as AdminContentRouteImport } from './routes/admin.content'
+import { Route as AdminCommentsRouteImport } from './routes/admin.comments'
 import { Route as AdminCateringRouteImport } from './routes/admin.catering'
 import { Route as DiamondAdminIndexRouteImport } from './routes/diamond.admin.index'
 import { Route as DiamondAdminTestimonialsRouteImport } from './routes/diamond.admin.testimonials'
@@ -188,6 +189,11 @@ const AdminContentRoute = AdminContentRouteImport.update({
   path: '/content',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminCommentsRoute = AdminCommentsRouteImport.update({
+  id: '/comments',
+  path: '/comments',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminCateringRoute = AdminCateringRouteImport.update({
   id: '/catering',
   path: '/catering',
@@ -257,6 +263,7 @@ export interface FileRoutesByFullPath {
   '/reservations': typeof ReservationsRoute
   '/story': typeof StoryRoute
   '/admin/catering': typeof AdminCateringRoute
+  '/admin/comments': typeof AdminCommentsRoute
   '/admin/content': typeof AdminContentRoute
   '/admin/gallery': typeof AdminGalleryRoute
   '/admin/hours': typeof AdminHoursRoute
@@ -295,6 +302,7 @@ export interface FileRoutesByTo {
   '/reservations': typeof ReservationsRoute
   '/story': typeof StoryRoute
   '/admin/catering': typeof AdminCateringRoute
+  '/admin/comments': typeof AdminCommentsRoute
   '/admin/content': typeof AdminContentRoute
   '/admin/gallery': typeof AdminGalleryRoute
   '/admin/hours': typeof AdminHoursRoute
@@ -336,6 +344,7 @@ export interface FileRoutesById {
   '/reservations': typeof ReservationsRoute
   '/story': typeof StoryRoute
   '/admin/catering': typeof AdminCateringRoute
+  '/admin/comments': typeof AdminCommentsRoute
   '/admin/content': typeof AdminContentRoute
   '/admin/gallery': typeof AdminGalleryRoute
   '/admin/hours': typeof AdminHoursRoute
@@ -378,6 +387,7 @@ export interface FileRouteTypes {
     | '/reservations'
     | '/story'
     | '/admin/catering'
+    | '/admin/comments'
     | '/admin/content'
     | '/admin/gallery'
     | '/admin/hours'
@@ -416,6 +426,7 @@ export interface FileRouteTypes {
     | '/reservations'
     | '/story'
     | '/admin/catering'
+    | '/admin/comments'
     | '/admin/content'
     | '/admin/gallery'
     | '/admin/hours'
@@ -456,6 +467,7 @@ export interface FileRouteTypes {
     | '/reservations'
     | '/story'
     | '/admin/catering'
+    | '/admin/comments'
     | '/admin/content'
     | '/admin/gallery'
     | '/admin/hours'
@@ -696,6 +708,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminContentRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/comments': {
+      id: '/admin/comments'
+      path: '/comments'
+      fullPath: '/admin/comments'
+      preLoaderRoute: typeof AdminCommentsRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/catering': {
       id: '/admin/catering'
       path: '/catering'
@@ -771,6 +790,7 @@ declare module '@tanstack/react-router' {
 
 interface AdminRouteChildren {
   AdminCateringRoute: typeof AdminCateringRoute
+  AdminCommentsRoute: typeof AdminCommentsRoute
   AdminContentRoute: typeof AdminContentRoute
   AdminGalleryRoute: typeof AdminGalleryRoute
   AdminHoursRoute: typeof AdminHoursRoute
@@ -787,6 +807,7 @@ interface AdminRouteChildren {
 
 const AdminRouteChildren: AdminRouteChildren = {
   AdminCateringRoute: AdminCateringRoute,
+  AdminCommentsRoute: AdminCommentsRoute,
   AdminContentRoute: AdminContentRoute,
   AdminGalleryRoute: AdminGalleryRoute,
   AdminHoursRoute: AdminHoursRoute,
