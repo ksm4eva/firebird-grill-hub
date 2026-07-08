@@ -369,7 +369,14 @@ export function AdminProvider({ children }: { children: ReactNode }) {
       const raw = localStorage.getItem(STORAGE_KEY);
       if (raw) {
         const parsed = JSON.parse(raw) as Partial<AdminState>;
-        setStateInner({ ...SEED, ...parsed });
+        setStateInner({
+          ...SEED,
+          ...parsed,
+          siteContent: { ...SEED.siteContent, ...(parsed.siteContent ?? {}) },
+          gallery: parsed.gallery ?? SEED.gallery,
+          testimonials: parsed.testimonials ?? SEED.testimonials,
+          comments: parsed.comments ?? SEED.comments,
+        });
       }
     } catch {}
   }, []);
