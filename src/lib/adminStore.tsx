@@ -278,7 +278,38 @@ const seedSiteContent: SiteContent = {
     { id: "v2", title: "Whole, not processed", text: "Locally sourced beef and poultry from Ghanaian farms. Brioche baked daily. Zero artificial anything." },
     { id: "v3", title: "Made to order", text: "Nothing sits under a lamp. Your order fires the second you hit confirm." },
   ],
+  menuHighlights: {
+    eyebrow: "The Lineup",
+    titleLine1: "MENU",
+    titleLine2: "HIGHLIGHTS.",
+  },
+  gallery: {
+    eyebrow: "Up Close",
+    titleLine1: "STRAIGHT",
+    titleLine2: "FROM THE GRILL.",
+  },
+  reviews: {
+    eyebrow: "Word of Mouth",
+    titleLine1: "WHAT OUR",
+    titleLine2: "CUSTOMERS SAY.",
+  },
 };
+
+const seedGallery: GalleryShot[] = [
+  { id: "g1", src: heroBurger, label: "Signature Burger", span: "lg:row-span-2" },
+  { id: "g2", src: galleryGrill, label: "Open Flame" },
+  { id: "g3", src: wings, label: "Suya Wings" },
+  { id: "g4", src: galleryInterior, label: "The Room", span: "lg:col-span-2" },
+  { id: "g5", src: menuMocktail, label: "Sobolo Spritz" },
+  { id: "g6", src: galleryFries, label: "Waffle Fries" },
+  { id: "g7", src: galleryDessert, label: "Sweet Heat" },
+];
+
+const seedTestimonials: Testimonial[] = [
+  { id: "tm1", name: "Kwame A.", role: "Osu, Accra", quote: "The Firebird Burger ruined every other burger for me. That char, that sauce — it's not normal fast food.", featured: true },
+  { id: "tm2", name: "Akosua M.", role: "Kumasi", quote: "The suya wings are insanity. I've ordered four times this week and have zero regrets. Sauce game is unreal.", featured: true },
+  { id: "tm3", name: "Yaw B.", role: "East Legon, Accra", quote: "Fast casual that feels like a chef's kitchen. The jollof bowl is fresh, the chicken is crispy perfection.", featured: true },
+];
 
 const seedSettings: Settings = {
   currency: "GHS",
