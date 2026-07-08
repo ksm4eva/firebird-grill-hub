@@ -112,7 +112,26 @@ function ItemEditor({ item, onSave, onClose, sections }: { item: MenuItem; onSav
           <div className="sm:col-span-2"><Field label="Description"><textarea rows={2} value={draft.desc} onChange={(e) => setDraft({ ...draft, desc: e.target.value })} className="input" /></Field></div>
           <Field label="Section"><select value={draft.sectionId} onChange={(e) => setDraft({ ...draft, sectionId: e.target.value })} className="input">{sections.map((s) => <option key={s.id} value={s.id}>{s.title}</option>)}</select></Field>
           <Field label="Tag (optional)"><input value={draft.tag ?? ""} onChange={(e) => setDraft({ ...draft, tag: e.target.value || undefined })} className="input" placeholder="Signature, Spicy, Ghana…" /></Field>
-          <div className="sm:col-span-2"><Field label="Image URL (optional)"><input value={draft.img ?? ""} onChange={(e) => setDraft({ ...draft, img: e.target.value || undefined })} className="input" placeholder="https://…" /></Field></div>
+          <div className="sm:col-span-2">
+            <Field label="Image">
+              <div className="flex items-start gap-3">
+                <div className="grid h-24 w-24 shrink-0 place-items-center overflow-hidden rounded-xl border border-slate-200 bg-slate-50 text-[10px] text-slate-400">
+                  {draft.img ? <img src={draft.img} alt="" className="h-full w-full object-cover" /> : "No image"}
+                </div>
+                <div className="flex-1 space-y-2">
+                  <input type="file" accept="image/*" onChange={async (e) => {
+                    const f = e.target.files?.[0]; if (!f) return;
+                    if (f.size > 1_200_000) { alert("Image too large. Please pick under 1.2 MB."); e.target.value = ""; return; }
+                    const dataUrl = await new Promise<string>((res, rej) => { const r = new FileReader(); r.onload = () => res(String(r.result)); r.onerror = rej; r.readAsDataURL(f); });
+                    setDraft({ ...draft, img: dataUrl });
+                    e.target.value = "";
+                  }} className="block w-full text-xs" />
+                  <input value={draft.img?.startsWith("data:") ? "" : (draft.img ?? "")} onChange={(e) => setDraft({ ...draft, img: e.target.value || undefined })} className="input" placeholder="…or paste an image URL" />
+                  {draft.img && <button type="button" onClick={() => setDraft({ ...draft, img: undefined })} className="text-xs font-semibold text-red-600 hover:underline">Remove image</button>}
+                </div>
+              </div>
+            </Field>
+          </div>
           <label className="flex items-center gap-2 text-sm"><input type="checkbox" checked={draft.available} onChange={(e) => setDraft({ ...draft, available: e.target.checked })} /> Available</label>
           <label className="flex items-center gap-2 text-sm"><input type="checkbox" checked={draft.featured} onChange={(e) => setDraft({ ...draft, featured: e.target.checked })} /> Featured on home</label>
           <label className="flex items-center gap-2 text-sm"><input type="checkbox" checked={!!draft.veg} onChange={(e) => setDraft({ ...draft, veg: e.target.checked })} /> Plant-based</label>
