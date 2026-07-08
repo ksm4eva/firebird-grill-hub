@@ -130,9 +130,9 @@ function Hero() {
         JUICY
       </motion.span>
 
-      <div className="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-12 px-6 lg:grid-cols-[minmax(0,4fr)_minmax(0,6fr)] lg:gap-8 lg:px-10">
+      <div className="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-8 px-6 lg:grid-cols-[minmax(0,4fr)_minmax(0,6fr)] lg:gap-8 lg:px-10">
         {/* LEFT — content */}
-        <div className="relative">
+        <div className="relative order-2 lg:order-1">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
@@ -147,7 +147,7 @@ function Hero() {
             initial={{ opacity: 0, x: -60, filter: "blur(10px)" }}
             animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
             transition={{ duration: 1, delay: 0.35, ease }}
-            className="font-bebas mt-6 text-white leading-[0.9] text-6xl sm:text-7xl lg:text-8xl xl:text-9xl drop-shadow-[0_8px_24px_rgba(0,0,0,0.35)]"
+            className="font-bebas mt-6 text-white leading-[0.9] text-5xl sm:text-7xl lg:text-8xl xl:text-9xl drop-shadow-[0_8px_24px_rgba(0,0,0,0.35)]"
           >
             BIG FLAVOR.
             <br />
@@ -208,8 +208,8 @@ function Hero() {
           </motion.div>
         </div>
 
-        {/* RIGHT — burger */}
-        <div className="relative flex items-center justify-center" style={{ perspective: 1200 }}>
+        {/* RIGHT — burger (shown FIRST on mobile so it's visible in the fold) */}
+        <div className="relative order-1 flex items-center justify-center lg:order-2" style={{ perspective: 1200 }}>
           <motion.div
             style={{
               x: burgerX,
@@ -218,7 +218,7 @@ function Hero() {
               rotateX: burgerRotX,
               transformStyle: "preserve-3d",
             }}
-            className="burger-v2-float relative w-full max-w-[720px]"
+            className="burger-v2-float relative mx-auto w-full max-w-[360px] sm:max-w-[520px] lg:max-w-[720px]"
           >
             <div aria-hidden className="absolute inset-6 rounded-full bg-[radial-gradient(closest-side,rgba(255,210,122,0.55),transparent_70%)] blur-3xl" />
             <motion.img
@@ -226,6 +226,10 @@ function Hero() {
               alt={featured?.name ?? "Firebird signature juicy double cheeseburger"}
               width={1920}
               height={1920}
+              loading="eager"
+              // @ts-expect-error fetchpriority is valid HTML but not yet in React types
+              fetchpriority="high"
+              decoding="async"
               className="burger-v2-enter relative z-10 w-full drop-shadow-[0_50px_60px_rgba(0,0,0,0.45)]"
               whileHover={{ scale: 1.04 }}
               transition={{ type: "spring", stiffness: 200, damping: 18 }}
