@@ -59,6 +59,7 @@ function AdminShell({ children }: { children: ReactNode }) {
     "/admin/orders": state.orders.filter((o) => o.status === "new").length,
     "/admin/reservations": state.reservations.filter((r) => r.status === "pending").length,
     "/admin/catering": state.cateringInquiries.filter((c) => c.status === "new").length,
+    "/admin/comments": state.comments.filter((c) => c.status === "pending").length,
   } as Record<string, number>;
 
   return (
