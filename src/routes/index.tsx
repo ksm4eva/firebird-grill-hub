@@ -1,11 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Flame, Leaf, Star, MapPin, Clock, Phone } from "lucide-react";
-import { useRef } from "react";
+import { ArrowRight, Flame, Leaf, Star, MapPin, Clock, Phone, Send } from "lucide-react";
+import { useRef, useState } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 
 import { Navbar } from "@/components/firebird/Navbar";
 import { Footer } from "@/components/firebird/Footer";
-import { useAdmin } from "@/lib/adminStore";
+import { useAdmin, uid } from "@/lib/adminStore";
 import { formatGHS } from "@/lib/format";
 
 import logoBlue from "@/assets/firebird-emblem-blue.png";
