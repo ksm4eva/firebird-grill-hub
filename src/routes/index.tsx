@@ -316,13 +316,14 @@ function About() {
 function MenuPreview() {
   const { state } = useAdmin();
   const featured = state.menuItems.filter((i) => i.featured && i.available).slice(0, 4);
+  const m = state.siteContent.menuHighlights;
   return (
     <section id="menu" className="bg-[var(--cream)] py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.3em] text-[var(--accent)]">The Lineup</p>
-            <h2 className="text-display mt-4 text-5xl text-[var(--ink)] sm:text-6xl lg:text-7xl">MENU<br /><span className="text-[var(--primary)]">HIGHLIGHTS.</span></h2>
+            <p className="text-xs font-bold uppercase tracking-[0.3em] text-[var(--accent)]">{m.eyebrow}</p>
+            <h2 className="text-display mt-4 text-5xl text-[var(--ink)] sm:text-6xl lg:text-7xl">{m.titleLine1}<br /><span className="text-[var(--primary)]">{m.titleLine2}</span></h2>
           </div>
           <Link to="/menu" className="btn-primary">Full Menu <ArrowRight size={16} /></Link>
         </div>
