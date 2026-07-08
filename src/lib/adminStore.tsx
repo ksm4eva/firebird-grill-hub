@@ -5,6 +5,8 @@ import wings from "@/assets/wings.jpg";
 import menuChicken from "@/assets/menu-chicken.jpg";
 import menuBowl from "@/assets/menu-bowl.jpg";
 import menuMocktail from "@/assets/menu-mocktail.jpg";
+import galleryInterior from "@/assets/gallery-interior.jpg";
+import galleryGrill from "@/assets/gallery-grill.jpg";
 import galleryFries from "@/assets/gallery-fries.jpg";
 import galleryDessert from "@/assets/gallery-dessert.jpg";
 
