@@ -156,6 +156,9 @@ export type AdminState = {
   loyaltyTiers: LoyaltyTier[];
   loyaltyRewards: LoyaltyReward[];
   siteContent: SiteContent;
+  gallery: GalleryShot[];
+  testimonials: Testimonial[];
+  comments: CustomerComment[];
   orders: Order[];
   reservations: Reservation[];
   cateringInquiries: CateringInquiry[];
