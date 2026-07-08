@@ -94,6 +94,21 @@ function ContentAdmin() {
           ))}
         </ul>
       </Card>
+
+      <Card className="mt-6">
+        <h3 className="text-display text-xl">Section headings (Home)</h3>
+        <p className="mt-1 text-xs text-slate-500">These are the eyebrow and headline copy above the Menu Highlights, Gallery, and Reviews sections.</p>
+        <div className="mt-4 grid gap-6 lg:grid-cols-3">
+          {(["menuHighlights", "gallery", "reviews"] as const).map((k) => (
+            <div key={k} className="space-y-2 rounded-xl bg-slate-50 p-3">
+              <p className="text-[10px] font-bold uppercase tracking-widest text-slate-500">{k === "menuHighlights" ? "Menu highlights" : k === "gallery" ? "Gallery" : "Reviews"}</p>
+              <input className="ai" placeholder="Eyebrow" value={c[k].eyebrow} onChange={(e) => setC({ ...c, [k]: { ...c[k], eyebrow: e.target.value } })} />
+              <input className="ai" placeholder="Title line 1" value={c[k].titleLine1} onChange={(e) => setC({ ...c, [k]: { ...c[k], titleLine1: e.target.value } })} />
+              <input className="ai" placeholder="Title line 2 (accent color)" value={c[k].titleLine2} onChange={(e) => setC({ ...c, [k]: { ...c[k], titleLine2: e.target.value } })} />
+            </div>
+          ))}
+        </div>
+      </Card>
       <style>{`.ai{width:100%;border:1px solid #e2e8f0;background:#fff;border-radius:0.75rem;padding:0.625rem 0.875rem;font-size:0.875rem;outline:none}`}</style>
     </>
   );

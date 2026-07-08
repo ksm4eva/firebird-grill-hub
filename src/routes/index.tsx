@@ -1,22 +1,17 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, Flame, Leaf, Star, MapPin, Clock, Phone } from "lucide-react";
-import { useRef } from "react";
+import { ArrowRight, Flame, Leaf, Star, MapPin, Clock, Phone, Send } from "lucide-react";
+import { useRef, useState } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 
 import { Navbar } from "@/components/firebird/Navbar";
 import { Footer } from "@/components/firebird/Footer";
-import { useAdmin } from "@/lib/adminStore";
+import { useAdmin, uid } from "@/lib/adminStore";
 import { formatGHS } from "@/lib/format";
 
 import logoBlue from "@/assets/firebird-emblem-blue.png";
 import heroBurger from "@/assets/hero-burger.jpg";
 import heroBurgerOnly from "@/assets/hero-burger-only.png.asset.json";
-import galleryInterior from "@/assets/gallery-interior.jpg";
-import galleryGrill from "@/assets/gallery-grill.jpg";
-import galleryFries from "@/assets/gallery-fries.jpg";
-import galleryDessert from "@/assets/gallery-dessert.jpg";
-import menuMocktail from "@/assets/menu-mocktail.jpg";
-import wings from "@/assets/wings.jpg";
+// gallery assets are now sourced from the admin store
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -135,9 +130,9 @@ function Hero() {
         JUICY
       </motion.span>
 
-      <div className="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-12 px-6 lg:grid-cols-[minmax(0,4fr)_minmax(0,6fr)] lg:gap-8 lg:px-10">
+      <div className="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-8 px-6 lg:grid-cols-[minmax(0,4fr)_minmax(0,6fr)] lg:gap-8 lg:px-10">
         {/* LEFT — content */}
-        <div className="relative">
+        <div className="relative order-2 lg:order-1">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
@@ -152,7 +147,7 @@ function Hero() {
             initial={{ opacity: 0, x: -60, filter: "blur(10px)" }}
             animate={{ opacity: 1, x: 0, filter: "blur(0px)" }}
             transition={{ duration: 1, delay: 0.35, ease }}
-            className="font-bebas mt-6 text-white leading-[0.9] text-6xl sm:text-7xl lg:text-8xl xl:text-9xl drop-shadow-[0_8px_24px_rgba(0,0,0,0.35)]"
+            className="font-bebas mt-6 text-white leading-[0.9] text-5xl sm:text-7xl lg:text-8xl xl:text-9xl drop-shadow-[0_8px_24px_rgba(0,0,0,0.35)]"
           >
             BIG FLAVOR.
             <br />
@@ -213,8 +208,8 @@ function Hero() {
           </motion.div>
         </div>
 
-        {/* RIGHT — burger */}
-        <div className="relative flex items-center justify-center" style={{ perspective: 1200 }}>
+        {/* RIGHT — burger (shown FIRST on mobile so it's visible in the fold) */}
+        <div className="relative order-1 flex items-center justify-center lg:order-2" style={{ perspective: 1200 }}>
           <motion.div
             style={{
               x: burgerX,
@@ -223,7 +218,7 @@ function Hero() {
               rotateX: burgerRotX,
               transformStyle: "preserve-3d",
             }}
-            className="burger-v2-float relative w-full max-w-[720px]"
+            className="burger-v2-float relative mx-auto w-full max-w-[360px] sm:max-w-[520px] lg:max-w-[720px]"
           >
             <div aria-hidden className="absolute inset-6 rounded-full bg-[radial-gradient(closest-side,rgba(255,210,122,0.55),transparent_70%)] blur-3xl" />
             <motion.img
@@ -231,6 +226,10 @@ function Hero() {
               alt={featured?.name ?? "Firebird signature juicy double cheeseburger"}
               width={1920}
               height={1920}
+              loading="eager"
+              // @ts-expect-error fetchpriority is valid HTML but not yet in React types
+              fetchpriority="high"
+              decoding="async"
               className="burger-v2-enter relative z-10 w-full drop-shadow-[0_50px_60px_rgba(0,0,0,0.45)]"
               whileHover={{ scale: 1.04 }}
               transition={{ type: "spring", stiffness: 200, damping: 18 }}
@@ -317,13 +316,14 @@ function About() {
 function MenuPreview() {
   const { state } = useAdmin();
   const featured = state.menuItems.filter((i) => i.featured && i.available).slice(0, 4);
+  const m = state.siteContent.menuHighlights;
   return (
     <section id="menu" className="bg-[var(--cream)] py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.3em] text-[var(--accent)]">The Lineup</p>
-            <h2 className="text-display mt-4 text-5xl text-[var(--ink)] sm:text-6xl lg:text-7xl">MENU<br /><span className="text-[var(--primary)]">HIGHLIGHTS.</span></h2>
+            <p className="text-xs font-bold uppercase tracking-[0.3em] text-[var(--accent)]">{m.eyebrow}</p>
+            <h2 className="text-display mt-4 text-5xl text-[var(--ink)] sm:text-6xl lg:text-7xl">{m.titleLine1}<br /><span className="text-[var(--primary)]">{m.titleLine2}</span></h2>
           </div>
           <Link to="/menu" className="btn-primary">Full Menu <ArrowRight size={16} /></Link>
         </div>
@@ -350,68 +350,145 @@ function MenuPreview() {
   );
 }
 
-const galleryShots = [
-  { src: heroBurger, label: "Signature Burger", span: "lg:row-span-2" },
-  { src: galleryGrill, label: "Open Flame" },
-  { src: wings, label: "Suya Wings" },
-  { src: galleryInterior, label: "The Room", span: "lg:col-span-2" },
-  { src: menuMocktail, label: "Sobolo Spritz" },
-  { src: galleryFries, label: "Waffle Fries" },
-  { src: galleryDessert, label: "Sweet Heat" },
-];
-
 function Gallery() {
+  const { state } = useAdmin();
+  const shots = state.gallery;
+  const g = state.siteContent.gallery;
+  const [firstWord, ...rest] = g.titleLine2.split(" ");
+  const restOfLine = rest.join(" ");
   return (
     <section id="gallery" className="bg-[var(--primary)] py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="max-w-2xl">
-          <p className="text-xs font-bold uppercase tracking-[0.3em] text-[var(--accent)]">Up Close</p>
-          <h2 className="text-display mt-4 text-5xl text-[var(--cream)] sm:text-6xl lg:text-7xl">STRAIGHT<br />FROM THE <span className="text-[var(--accent)]">GRILL.</span></h2>
+          <p className="text-xs font-bold uppercase tracking-[0.3em] text-[var(--accent)]">{g.eyebrow}</p>
+          <h2 className="text-display mt-4 text-5xl text-[var(--cream)] sm:text-6xl lg:text-7xl">
+            {g.titleLine1}<br />
+            {firstWord ? `${firstWord} ` : ""}<span className="text-[var(--accent)]">{restOfLine || ""}</span>
+          </h2>
         </div>
-        <div className="mt-14 grid auto-rows-[220px] grid-cols-2 gap-4 lg:grid-cols-4 lg:auto-rows-[260px]">
-          {galleryShots.map((g, i) => (
-            <figure key={i} className={`img-zoom group relative overflow-hidden rounded-[1.75rem] bg-black/20 ${g.span ?? ""}`}>
-              <img src={g.src} alt={g.label} loading="lazy" className="h-full w-full object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-t from-[var(--primary)]/90 via-[var(--primary)]/0 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-              <figcaption className="absolute bottom-4 left-4 translate-y-2 text-display text-lg text-[var(--cream)] opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">{g.label}</figcaption>
-            </figure>
-          ))}
-        </div>
+        {shots.length === 0 ? (
+          <p className="mt-14 text-[var(--cream)]/70">No gallery shots yet.</p>
+        ) : (
+          <div className="mt-14 grid auto-rows-[220px] grid-cols-2 gap-4 lg:grid-cols-4 lg:auto-rows-[260px]">
+            {shots.map((s) => (
+              <figure key={s.id} className={`img-zoom group relative overflow-hidden rounded-[1.75rem] bg-black/20 ${s.span ?? ""}`}>
+                <img src={s.src} alt={s.label} loading="lazy" className="h-full w-full object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[var(--primary)]/90 via-[var(--primary)]/0 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                <figcaption className="absolute bottom-4 left-4 translate-y-2 text-display text-lg text-[var(--cream)] opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">{s.label}</figcaption>
+              </figure>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
 }
 
-const reviews = [
-  { name: "Kwame A.", role: "Osu, Accra", quote: "The Firebird Burger ruined every other burger for me. That char, that sauce — it's not normal fast food." },
-  { name: "Akosua M.", role: "Kumasi", quote: "The suya wings are insanity. I've ordered four times this week and have zero regrets. Sauce game is unreal." },
-  { name: "Yaw B.", role: "East Legon, Accra", quote: "Fast casual that feels like a chef's kitchen. The jollof bowl is fresh, the chicken is crispy perfection." },
-];
-
 function Reviews() {
+  const { state, setState } = useAdmin();
+  const r = state.siteContent.reviews;
+  const featuredTestimonials = state.testimonials.filter((t) => t.featured);
+  const featuredComments = state.comments.filter((c) => c.status === "approved" && c.featured);
+  const items: { key: string; name: string; role: string; quote: string }[] = [
+    ...featuredTestimonials.map((t) => ({ key: `t-${t.id}`, name: t.name, role: t.role, quote: t.quote })),
+    ...featuredComments.map((c) => ({ key: `c-${c.id}`, name: c.name, role: c.location, quote: c.message })),
+  ].slice(0, 6);
+
   return (
     <section id="reviews" className="bg-[var(--cream)] py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="text-center">
-          <p className="text-xs font-bold uppercase tracking-[0.3em] text-[var(--accent)]">Word of Mouth</p>
-          <h2 className="text-display mt-4 text-5xl text-[var(--ink)] sm:text-6xl lg:text-7xl">WHAT OUR<br /><span className="text-[var(--primary)]">CUSTOMERS SAY.</span></h2>
+          <p className="text-xs font-bold uppercase tracking-[0.3em] text-[var(--accent)]">{r.eyebrow}</p>
+          <h2 className="text-display mt-4 text-5xl text-[var(--ink)] sm:text-6xl lg:text-7xl">{r.titleLine1}<br /><span className="text-[var(--primary)]">{r.titleLine2}</span></h2>
         </div>
-        <div className="mt-16 grid gap-6 lg:grid-cols-3">
-          {reviews.map((r, i) => (
-            <article key={r.name} className="card-lift relative rounded-[2rem] bg-white p-8 shadow-soft animate-rise" style={{ animationDelay: `${i * 100}ms` }}>
-              <div className="flex items-center gap-1 text-[var(--accent)]">
-                {Array.from({ length: 5 }).map((_, k) => (<Star key={k} size={18} fill="currentColor" strokeWidth={0} />))}
-              </div>
-              <p className="mt-5 text-base leading-relaxed text-[var(--ink)]/80">"{r.quote}"</p>
-              <p className="mt-6 text-display text-lg">{r.name}</p>
-              <p className="text-xs uppercase tracking-widest text-[var(--ink)]/50">{r.role}</p>
-            </article>
-          ))}
-        </div>
+        {items.length > 0 && (
+          <div className="mt-16 grid gap-6 lg:grid-cols-3">
+            {items.map((it, i) => (
+              <article key={it.key} className="card-lift relative rounded-[2rem] bg-white p-8 shadow-soft animate-rise" style={{ animationDelay: `${i * 100}ms` }}>
+                <div className="flex items-center gap-1 text-[var(--accent)]">
+                  {Array.from({ length: 5 }).map((_, k) => (<Star key={k} size={18} fill="currentColor" strokeWidth={0} />))}
+                </div>
+                <p className="mt-5 text-base leading-relaxed text-[var(--ink)]/80">"{it.quote}"</p>
+                <p className="mt-6 text-display text-lg">{it.name}</p>
+                <p className="text-xs uppercase tracking-widest text-[var(--ink)]/50">{it.role}</p>
+              </article>
+            ))}
+          </div>
+        )}
+        <CommentForm onSubmit={(c) => setState((prev) => ({ ...prev, comments: [c, ...prev.comments] }))} />
       </div>
     </section>
   );
 }
+
+function CommentForm({ onSubmit }: { onSubmit: (c: import("@/lib/adminStore").CustomerComment) => void }) {
+  const [name, setName] = useState("");
+  const [location, setLocation] = useState("");
+  const [rating, setRating] = useState(5);
+  const [message, setMessage] = useState("");
+  const [sent, setSent] = useState(false);
+
+  function submit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!name.trim() || !message.trim()) return;
+    onSubmit({
+      id: uid("cmt"),
+      createdAt: new Date().toISOString(),
+      name: name.trim().slice(0, 80),
+      location: location.trim().slice(0, 80),
+      rating,
+      message: message.trim().slice(0, 600),
+      status: "pending",
+      featured: false,
+    });
+    setName(""); setLocation(""); setRating(5); setMessage("");
+    setSent(true);
+    setTimeout(() => setSent(false), 4000);
+  }
+
+  return (
+    <div className="mx-auto mt-20 max-w-2xl rounded-[2rem] bg-white p-8 shadow-soft sm:p-10">
+      <div className="text-center">
+        <p className="text-xs font-bold uppercase tracking-[0.3em] text-[var(--accent)]">Share your experience</p>
+        <h3 className="text-display mt-3 text-3xl text-[var(--ink)] sm:text-4xl">LEAVE A COMMENT.</h3>
+        <p className="mt-2 text-sm text-[var(--ink)]/60">Your comment goes to our team. We may feature it here.</p>
+      </div>
+      <form onSubmit={submit} className="mt-6 space-y-4">
+        <div className="grid gap-4 sm:grid-cols-2">
+          <label className="block">
+            <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--ink)]/60">Name</span>
+            <input required maxLength={80} value={name} onChange={(e) => setName(e.target.value)} className="mt-1 w-full rounded-xl border border-slate-200 bg-[var(--cream)] px-4 py-3 text-sm outline-none focus:border-[var(--primary)]" />
+          </label>
+          <label className="block">
+            <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--ink)]/60">City / Area</span>
+            <input maxLength={80} value={location} onChange={(e) => setLocation(e.target.value)} className="mt-1 w-full rounded-xl border border-slate-200 bg-[var(--cream)] px-4 py-3 text-sm outline-none focus:border-[var(--primary)]" placeholder="e.g. Osu, Accra" />
+          </label>
+        </div>
+        <div>
+          <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--ink)]/60">Rating</span>
+          <div className="mt-2 flex items-center gap-1">
+            {[1,2,3,4,5].map((n) => (
+              <button key={n} type="button" onClick={() => setRating(n)} aria-label={`${n} stars`}>
+                <Star size={26} className={n <= rating ? "fill-[var(--accent)] text-[var(--accent)]" : "text-slate-300"} strokeWidth={n <= rating ? 0 : 1.5} />
+              </button>
+            ))}
+          </div>
+        </div>
+        <label className="block">
+          <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--ink)]/60">Your comment</span>
+          <textarea required maxLength={600} rows={4} value={message} onChange={(e) => setMessage(e.target.value)} className="mt-1 w-full rounded-xl border border-slate-200 bg-[var(--cream)] px-4 py-3 text-sm outline-none focus:border-[var(--primary)]" placeholder="Tell us about your Firebird experience…" />
+        </label>
+        <div className="flex flex-col items-center gap-3 pt-2 sm:flex-row sm:justify-between">
+          {sent ? (
+            <p className="text-sm font-semibold text-emerald-600">Thanks! Your comment was sent to our team.</p>
+          ) : <span />}
+          <button type="submit" className="btn-flame"><Send size={14} /> Send comment</button>
+        </div>
+      </form>
+    </div>
+  );
+}
+
 
 function CallToAction() {
   return (

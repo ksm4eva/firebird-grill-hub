@@ -1,6 +1,6 @@
 import { useRouterState, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState, type ReactNode } from "react";
-import { LayoutDashboard, UtensilsCrossed, MapPin, Clock, FileText, ShoppingBag, Calendar, Sparkles, Award, Settings as SettingsIcon, LogOut, Menu, X, Flame, RotateCcw } from "lucide-react";
+import { LayoutDashboard, UtensilsCrossed, Image as ImageIcon, MessageSquare, Quote, MapPin, Clock, FileText, ShoppingBag, Calendar, Sparkles, Award, Settings as SettingsIcon, LogOut, Menu, X, Flame, RotateCcw } from "lucide-react";
 import { isAdminLoggedIn, adminLogout } from "@/lib/adminAuth";
 import { useAdmin } from "@/lib/adminStore";
 import logoCream from "@/assets/firebird-emblem-cream.png";
@@ -8,6 +8,9 @@ import logoCream from "@/assets/firebird-emblem-cream.png";
 const navItems: { to: string; label: string; icon: typeof LayoutDashboard; exact?: boolean }[] = [
   { to: "/admin", label: "Dashboard", icon: LayoutDashboard, exact: true },
   { to: "/admin/menu", label: "Menu", icon: UtensilsCrossed },
+  { to: "/admin/gallery", label: "Gallery", icon: ImageIcon },
+  { to: "/admin/testimonials", label: "Testimonials", icon: Quote },
+  { to: "/admin/comments", label: "Comments", icon: MessageSquare },
   { to: "/admin/locations", label: "Locations", icon: MapPin },
   { to: "/admin/hours", label: "Hours", icon: Clock },
   { to: "/admin/content", label: "Content", icon: FileText },
@@ -56,6 +59,7 @@ function AdminShell({ children }: { children: ReactNode }) {
     "/admin/orders": state.orders.filter((o) => o.status === "new").length,
     "/admin/reservations": state.reservations.filter((r) => r.status === "pending").length,
     "/admin/catering": state.cateringInquiries.filter((c) => c.status === "new").length,
+    "/admin/comments": state.comments.filter((c) => c.status === "pending").length,
   } as Record<string, number>;
 
   return (

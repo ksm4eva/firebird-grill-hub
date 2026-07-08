@@ -5,6 +5,8 @@ import wings from "@/assets/wings.jpg";
 import menuChicken from "@/assets/menu-chicken.jpg";
 import menuBowl from "@/assets/menu-bowl.jpg";
 import menuMocktail from "@/assets/menu-mocktail.jpg";
+import galleryInterior from "@/assets/gallery-interior.jpg";
+import galleryGrill from "@/assets/gallery-grill.jpg";
 import galleryFries from "@/assets/gallery-fries.jpg";
 import galleryDessert from "@/assets/gallery-dessert.jpg";
 
@@ -54,12 +56,41 @@ export type LoyaltyReward = { id: string; cost: number; item: string };
 
 export type TimelineEntry = { id: string; year: string; title: string; text: string };
 
+export type GalleryShot = {
+  id: string;
+  src: string;
+  label: string;
+  span?: "" | "lg:row-span-2" | "lg:col-span-2";
+};
+
+export type Testimonial = {
+  id: string;
+  name: string;
+  role: string;
+  quote: string;
+  featured: boolean;
+};
+
+export type CustomerComment = {
+  id: string;
+  createdAt: string;
+  name: string;
+  location: string;
+  rating: number;
+  message: string;
+  status: "pending" | "approved" | "rejected";
+  featured: boolean;
+};
+
 export type SiteContent = {
   hero: { eyebrow: string; titleLine1: string; titleLine2: string; titleAccent: string; subtitle: string };
   about: { headline: string; body: string; bullets: string[] };
   story: { intro: string; origin: string };
   timeline: TimelineEntry[];
   values: { id: string; title: string; text: string }[];
+  menuHighlights: { eyebrow: string; titleLine1: string; titleLine2: string };
+  gallery: { eyebrow: string; titleLine1: string; titleLine2: string };
+  reviews: { eyebrow: string; titleLine1: string; titleLine2: string };
 };
 
 export type Order = {
@@ -127,6 +158,9 @@ export type AdminState = {
   loyaltyTiers: LoyaltyTier[];
   loyaltyRewards: LoyaltyReward[];
   siteContent: SiteContent;
+  gallery: GalleryShot[];
+  testimonials: Testimonial[];
+  comments: CustomerComment[];
   orders: Order[];
   reservations: Reservation[];
   cateringInquiries: CateringInquiry[];
@@ -244,7 +278,38 @@ const seedSiteContent: SiteContent = {
     { id: "v2", title: "Whole, not processed", text: "Locally sourced beef and poultry from Ghanaian farms. Brioche baked daily. Zero artificial anything." },
     { id: "v3", title: "Made to order", text: "Nothing sits under a lamp. Your order fires the second you hit confirm." },
   ],
+  menuHighlights: {
+    eyebrow: "The Lineup",
+    titleLine1: "MENU",
+    titleLine2: "HIGHLIGHTS.",
+  },
+  gallery: {
+    eyebrow: "Up Close",
+    titleLine1: "STRAIGHT",
+    titleLine2: "FROM THE GRILL.",
+  },
+  reviews: {
+    eyebrow: "Word of Mouth",
+    titleLine1: "WHAT OUR",
+    titleLine2: "CUSTOMERS SAY.",
+  },
 };
+
+const seedGallery: GalleryShot[] = [
+  { id: "g1", src: heroBurger, label: "Signature Burger", span: "lg:row-span-2" },
+  { id: "g2", src: galleryGrill, label: "Open Flame" },
+  { id: "g3", src: wings, label: "Suya Wings" },
+  { id: "g4", src: galleryInterior, label: "The Room", span: "lg:col-span-2" },
+  { id: "g5", src: menuMocktail, label: "Sobolo Spritz" },
+  { id: "g6", src: galleryFries, label: "Waffle Fries" },
+  { id: "g7", src: galleryDessert, label: "Sweet Heat" },
+];
+
+const seedTestimonials: Testimonial[] = [
+  { id: "tm1", name: "Kwame A.", role: "Osu, Accra", quote: "The Firebird Burger ruined every other burger for me. That char, that sauce — it's not normal fast food.", featured: true },
+  { id: "tm2", name: "Akosua M.", role: "Kumasi", quote: "The suya wings are insanity. I've ordered four times this week and have zero regrets. Sauce game is unreal.", featured: true },
+  { id: "tm3", name: "Yaw B.", role: "East Legon, Accra", quote: "Fast casual that feels like a chef's kitchen. The jollof bowl is fresh, the chicken is crispy perfection.", featured: true },
+];
 
 const seedSettings: Settings = {
   currency: "GHS",
@@ -275,6 +340,9 @@ const SEED: AdminState = {
   loyaltyTiers: seedTiers,
   loyaltyRewards: seedRewards,
   siteContent: seedSiteContent,
+  gallery: seedGallery,
+  testimonials: seedTestimonials,
+  comments: [],
   orders: [],
   reservations: [],
   cateringInquiries: [],
@@ -301,7 +369,14 @@ export function AdminProvider({ children }: { children: ReactNode }) {
       const raw = localStorage.getItem(STORAGE_KEY);
       if (raw) {
         const parsed = JSON.parse(raw) as Partial<AdminState>;
-        setStateInner({ ...SEED, ...parsed });
+        setStateInner({
+          ...SEED,
+          ...parsed,
+          siteContent: { ...SEED.siteContent, ...(parsed.siteContent ?? {}) },
+          gallery: parsed.gallery ?? SEED.gallery,
+          testimonials: parsed.testimonials ?? SEED.testimonials,
+          comments: parsed.comments ?? SEED.comments,
+        });
       }
     } catch {}
   }, []);
