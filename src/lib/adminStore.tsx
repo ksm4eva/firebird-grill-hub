@@ -54,12 +54,41 @@ export type LoyaltyReward = { id: string; cost: number; item: string };
 
 export type TimelineEntry = { id: string; year: string; title: string; text: string };
 
+export type GalleryShot = {
+  id: string;
+  src: string;
+  label: string;
+  span?: "" | "lg:row-span-2" | "lg:col-span-2";
+};
+
+export type Testimonial = {
+  id: string;
+  name: string;
+  role: string;
+  quote: string;
+  featured: boolean;
+};
+
+export type CustomerComment = {
+  id: string;
+  createdAt: string;
+  name: string;
+  location: string;
+  rating: number;
+  message: string;
+  status: "pending" | "approved" | "rejected";
+  featured: boolean;
+};
+
 export type SiteContent = {
   hero: { eyebrow: string; titleLine1: string; titleLine2: string; titleAccent: string; subtitle: string };
   about: { headline: string; body: string; bullets: string[] };
   story: { intro: string; origin: string };
   timeline: TimelineEntry[];
   values: { id: string; title: string; text: string }[];
+  menuHighlights: { eyebrow: string; titleLine1: string; titleLine2: string };
+  gallery: { eyebrow: string; titleLine1: string; titleLine2: string };
+  reviews: { eyebrow: string; titleLine1: string; titleLine2: string };
 };
 
 export type Order = {
