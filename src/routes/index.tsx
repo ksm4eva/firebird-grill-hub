@@ -11,12 +11,7 @@ import { formatGHS } from "@/lib/format";
 import logoBlue from "@/assets/firebird-emblem-blue.png";
 import heroBurger from "@/assets/hero-burger.jpg";
 import heroBurgerOnly from "@/assets/hero-burger-only.png.asset.json";
-import galleryInterior from "@/assets/gallery-interior.jpg";
-import galleryGrill from "@/assets/gallery-grill.jpg";
-import galleryFries from "@/assets/gallery-fries.jpg";
-import galleryDessert from "@/assets/gallery-dessert.jpg";
-import menuMocktail from "@/assets/menu-mocktail.jpg";
-import wings from "@/assets/wings.jpg";
+// gallery assets are now sourced from the admin store
 
 export const Route = createFileRoute("/")({
   head: () => ({
