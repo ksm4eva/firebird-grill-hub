@@ -26,6 +26,7 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DiamondIndexRouteImport } from './routes/diamond.index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as AdminTestimonialsRouteImport } from './routes/admin.testimonials'
 import { Route as AdminSettingsRouteImport } from './routes/admin.settings'
 import { Route as AdminReservationsRouteImport } from './routes/admin.reservations'
 import { Route as AdminOrdersRouteImport } from './routes/admin.orders'
@@ -130,6 +131,11 @@ const DiamondIndexRoute = DiamondIndexRouteImport.update({
 const AdminIndexRoute = AdminIndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminTestimonialsRoute = AdminTestimonialsRouteImport.update({
+  id: '/testimonials',
+  path: '/testimonials',
   getParentRoute: () => AdminRoute,
 } as any)
 const AdminSettingsRoute = AdminSettingsRouteImport.update({
@@ -261,6 +267,7 @@ export interface FileRoutesByFullPath {
   '/admin/orders': typeof AdminOrdersRoute
   '/admin/reservations': typeof AdminReservationsRoute
   '/admin/settings': typeof AdminSettingsRoute
+  '/admin/testimonials': typeof AdminTestimonialsRoute
   '/admin/': typeof AdminIndexRoute
   '/diamond/': typeof DiamondIndexRoute
   '/diamond/admin/amenities': typeof DiamondAdminAmenitiesRoute
@@ -298,6 +305,7 @@ export interface FileRoutesByTo {
   '/admin/orders': typeof AdminOrdersRoute
   '/admin/reservations': typeof AdminReservationsRoute
   '/admin/settings': typeof AdminSettingsRoute
+  '/admin/testimonials': typeof AdminTestimonialsRoute
   '/admin': typeof AdminIndexRoute
   '/diamond': typeof DiamondIndexRoute
   '/diamond/admin/amenities': typeof DiamondAdminAmenitiesRoute
@@ -338,6 +346,7 @@ export interface FileRoutesById {
   '/admin/orders': typeof AdminOrdersRoute
   '/admin/reservations': typeof AdminReservationsRoute
   '/admin/settings': typeof AdminSettingsRoute
+  '/admin/testimonials': typeof AdminTestimonialsRoute
   '/admin/': typeof AdminIndexRoute
   '/diamond/': typeof DiamondIndexRoute
   '/diamond/admin/amenities': typeof DiamondAdminAmenitiesRoute
@@ -379,6 +388,7 @@ export interface FileRouteTypes {
     | '/admin/orders'
     | '/admin/reservations'
     | '/admin/settings'
+    | '/admin/testimonials'
     | '/admin/'
     | '/diamond/'
     | '/diamond/admin/amenities'
@@ -416,6 +426,7 @@ export interface FileRouteTypes {
     | '/admin/orders'
     | '/admin/reservations'
     | '/admin/settings'
+    | '/admin/testimonials'
     | '/admin'
     | '/diamond'
     | '/diamond/admin/amenities'
@@ -455,6 +466,7 @@ export interface FileRouteTypes {
     | '/admin/orders'
     | '/admin/reservations'
     | '/admin/settings'
+    | '/admin/testimonials'
     | '/admin/'
     | '/diamond/'
     | '/diamond/admin/amenities'
@@ -605,6 +617,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/admin/'
       preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/testimonials': {
+      id: '/admin/testimonials'
+      path: '/testimonials'
+      fullPath: '/admin/testimonials'
+      preLoaderRoute: typeof AdminTestimonialsRouteImport
       parentRoute: typeof AdminRoute
     }
     '/admin/settings': {
@@ -762,6 +781,7 @@ interface AdminRouteChildren {
   AdminOrdersRoute: typeof AdminOrdersRoute
   AdminReservationsRoute: typeof AdminReservationsRoute
   AdminSettingsRoute: typeof AdminSettingsRoute
+  AdminTestimonialsRoute: typeof AdminTestimonialsRoute
   AdminIndexRoute: typeof AdminIndexRoute
 }
 
@@ -777,6 +797,7 @@ const AdminRouteChildren: AdminRouteChildren = {
   AdminOrdersRoute: AdminOrdersRoute,
   AdminReservationsRoute: AdminReservationsRoute,
   AdminSettingsRoute: AdminSettingsRoute,
+  AdminTestimonialsRoute: AdminTestimonialsRoute,
   AdminIndexRoute: AdminIndexRoute,
 }
 
